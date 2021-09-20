@@ -1,3 +1,5 @@
+package Matrix;
+
 public class MatrixAlg {
     // static double[][] Gauss(){
     //     return
