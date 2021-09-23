@@ -1,6 +1,6 @@
-package Matrix;
+package Algorithm;
 
-public class MatrixAlg {
+public class Cramer {
     // static double[][] Gauss(){
     //     return
     // }
