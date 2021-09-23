@@ -14,6 +14,8 @@ int main() {
     scanf("%d %d", &m, &n);
     readMatrix(&m1, m, n);
     printf("\n");
-    gaussJordanEquation(m1);
+    // double det = determinantOBE(m1);
+    // printf("%.1f", det);
+    cramer(m1);
 
 }

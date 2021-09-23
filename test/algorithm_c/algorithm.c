@@ -22,8 +22,8 @@ Matrix cofactor(Matrix m, Matrix *mTemp, int p, int q, int n) {
     }
 }
 
-float determinantCofactor(Matrix m, int n) {
-    float d = 0;
+double determinantCofactor(Matrix m, int n) {
+    double d = 0;
 
     if (n == 1) {
         return ELMT(m, 0, 0);
@@ -36,7 +36,7 @@ float determinantCofactor(Matrix m, int n) {
 
         for (i=0; i<n;i++) {
             cofactor(m, &mTemp, 0, i, n);
-            d += sign*ELMT(m, 0, i)*determinantMatrix(mTemp, n-1);
+            d += sign*ELMT(m, 0, i)*determinantCofactor(mTemp, n-1);
             sign = -sign;
         }
 
@@ -44,9 +44,10 @@ float determinantCofactor(Matrix m, int n) {
     }
 }
 
-int determinantOBE(Matrix m) {
-    int a, i, j, k, n, x[ROWS(m)], det, total, temp;
-    int num1, num2;
+double determinantOBE(Matrix m) {
+    int a, i, j, k, n;
+    double num1, num2, temp;
+    double det, total;
 
     n = ROWS(m);
     det = 1;
@@ -91,11 +92,6 @@ int determinantOBE(Matrix m) {
 
             total *= num1;
         }
-
-        printf("%d.\n", count++);
-        displayMatrix(m);
-        printf("\n");
-    
     }
 
     // Determinan
@@ -221,4 +217,53 @@ double gaussJordanEquation(Matrix m) {
     for (i = 0; i<n; i++){
         printf("x[%d] = %0.2f\n", i+1, x[i]);
     }
+}
+
+
+double cramer (Matrix m) {
+    Matrix mTemp;
+    int n, i, j, k;
+    // Matrix n x n untuk mencari determinan
+    n = ROWS(m); 
+    CreateMatrix(n, n, &mTemp);
+    double x[n], detX[n];
+
+    // Isi Matrix temp dengan n x n SPL
+    for (i=0; i<n; i++) {
+        for (j=0; j<n; j++) {
+            ELMT(mTemp, i, j) = ELMT(m, i, j); 
+        }
+    }
+
+    // Inisialisasi det untuk x0
+    detX[0] = determinantOBE(mTemp);
+    if (detX[0] == 0) {
+        return 0;
+    }
+
+    // Mengganti tiap row dan insert determinan
+    for (i=0; i<n; i++) {
+        for (j=0; j<n; j++) {
+            ELMT(mTemp, j, i) = ELMT(m, j, n);
+            if (i > 0) {
+                ELMT(mTemp, j, i-1) = ELMT(m, j, i-1);
+            }
+        }
+        detX[i+1] = determinantOBE(mTemp);
+    }
+
+    // for (i=0; i<=n; i++) {
+    //     printf("Det x[%d] = %.1f\n", i, detX[0]);
+    // }
+
+    // Cari tiap x dengan determminan yang telah didapat
+    for (i=1; i<=n; i++){
+        x[i] = (detX[i]/detX[0]);
+    }
+
+    for (i=1; i<=n; i++) {
+        printf("x[%d] = %.1f\n", i, x[i]);
+    }
+
+
 }
