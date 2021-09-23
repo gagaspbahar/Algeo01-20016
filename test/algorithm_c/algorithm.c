@@ -180,8 +180,7 @@ Matrix OBE(Matrix m){
             ratio = a/b;
 
             for (k=0; k<col; k++){
-                ELMT(m, j, k) = ELMT(m, j, k) 
-                    - ratio*ELMT(m, i, k);
+                ELMT(m, j, k) = ELMT(m, j, k)  - ratio*ELMT(m, i, k);
             }
         }
     }
