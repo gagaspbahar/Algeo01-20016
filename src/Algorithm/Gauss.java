@@ -2,7 +2,7 @@ package Algorithm;
 import Matrix.*;
 public class Gauss {
     
-    public Matrix OBE(Matrix M){
+    public static Matrix OBE(Matrix M){
         int i,j,k,row,col,x;
         double a,b,ratio;
         row = M.getRowLength();
@@ -55,12 +55,12 @@ public class Gauss {
         return M;
     }
     
-    public double[] gaussEquation(Matrix M){
+    public static double[] gaussEquation(Matrix M){
         // Fungsi Memberikan solusi untuk Matriks M dalam bentuk array
         int i,j,n;
        
         
-        n = M.getColLength();
+        n = M.getColLength() - 1;
         double[] x = new double[n];
 
         //Gauss Elimination
