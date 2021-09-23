@@ -47,6 +47,7 @@ public class MatrixInput {
                     m.setElmt(x, i, j);
                 }
             }
+            sc.close();
             return m;
         }
         catch(FileNotFoundException e){
