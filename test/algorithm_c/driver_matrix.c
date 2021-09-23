@@ -14,8 +14,17 @@ int main() {
     scanf("%d %d", &m, &n);
     readMatrix(&m1, m, n);
     printf("\n");
+    gaussEquation(m1);
     // double det = determinantOBE(m1);
     // printf("%.1f", det);
-    cramer(m1);
+    
+    // Matrix mOBE, mOBET;
+    // mOBE = OBE(m1);
+    // mOBET = OBETereduksi(m1);
+
+    // displayMatrix(mOBE);
+    // printf("\n");
+    // printf("\n");
+    // displayMatrix(mOBET);
 
 }

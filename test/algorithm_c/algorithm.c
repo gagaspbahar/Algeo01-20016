@@ -103,7 +103,94 @@ double determinantOBE(Matrix m) {
     return (det/total);
 }
 
-double gaussEquation(Matrix m) {
+Matrix OBE(Matrix m){
+    int i, j, k, row, col, x;
+    double a, b, ratio;
+    row = ROWS(m);
+    col = COLS(m);
+
+    for (i=0; i<row; i++){
+        int x = i;
+        
+        // Find the first non 0 index
+        while (ELMT(m, x, i) == 0 && x < row) {
+            x++;
+        }
+
+        // Row Switching (between the i and non zero index)
+        if (x != i) {
+            for (j=0; j<col; j++) {
+                double temp;
+                temp = ELMT(m, x, j);
+                ELMT(m, x, j) = ELMT(m, i, j);
+                ELMT(m, i, j) = temp;
+            }
+
+        }
+
+        for (j=i+1; j < col;j++){
+            a = ELMT(m, j, i);
+            b = ELMT(m, i, i);
+            ratio = a/b;
+
+            for (k=0; k<col; k++){
+                ELMT(m, j, k) = ELMT(m, j, k) 
+                    - ratio*ELMT(m, i, k);
+            }
+            displayMatrix(m);
+            printf("\n");
+            printf("\n");
+        }
+    }
+
+    for (i=0; i<row; i++) {
+        if (ELMT(m, i, i) != 0) {
+            ratio = ELMT(m, i, i);
+            for (j=i; j<col; j++) {
+                ELMT(m, i, j) = ELMT(m, i, j)/ratio;
+            }
+        }
+    }
+
+    displayMatrix(m);
+
+    return m;
+}
+
+
+Matrix OBETereduksi(Matrix m){
+    int i, j, k, n, row, col;
+    double a, b, ratio;
+    m = OBE(m);
+
+    row = ROWS(m);
+    col = COLS(m);
+
+    for (i=row-1; i>=1; i--){
+
+        for (j=i-1; j>=0;j--){
+            a = ELMT(m, j, i);
+            b = ELMT(m, i, i);
+            ratio = a/b;
+
+            for (k=0; k<row+1; k++){
+                ELMT(m, j, k) = ELMT(m, j, k) 
+                    - ratio*ELMT(m, i, k);
+            }
+
+            displayMatrix(m);
+            printf("\n");
+            printf("\n");
+        }
+    }    
+
+    displayMatrix(m);
+
+    return m;
+}
+
+
+void gaussEquation(Matrix m) {
     // Untuk case yang hasilnya tidak parametrik
     int i, j, k, n;
     double a, b, ratio;
@@ -112,30 +199,7 @@ double gaussEquation(Matrix m) {
     double x[n];
 
     // Gauss Elimination
-    for (i=0; i<n; i++){
-
-        if (ELMT(m, i, i) == 0) {
-            return 0;
-        }
-
-        for (j=i+1; j < n+1;j++){
-            a = ELMT(m, j, i);
-            b = ELMT(m, i, i);
-            ratio = a/b;
-
-            for (k=0; k<n+1; k++){
-                ELMT(m, j, k) = ELMT(m, j, k) 
-                    - ratio*ELMT(m, i, k);
-            }
-        }
-    }
-
-    for (i=0; i<n; i++) {
-        ratio = ELMT(m, i, i);
-        for (j=i; j<n+1; j++) {
-            ELMT(m, i, j) = ELMT(m, i, j)/ratio;
-        }
-    }
+    m = OBE(m);
 
     // Backward Subtitution
     x[n-1] = ELMT(m, n-1, n)/ELMT(m, n-1, n-1);
@@ -158,7 +222,7 @@ double gaussEquation(Matrix m) {
 }
 
 
-double gaussJordanEquation(Matrix m) {
+void gaussJordanEquation(Matrix m) {
     // Untuk case yang hasilnya tidak parametrik
     int i, j, k, n;
     double a, b, ratio;
@@ -166,48 +230,8 @@ double gaussJordanEquation(Matrix m) {
     n = COLS(m)-1;
     double x[n];
 
-    // Gauss Elimination (Matriks Eselon)
-    for (i=0; i<n; i++){
-
-        if (ELMT(m, i, i) == 0) {
-            return 0;
-        }
-
-        for (j=i+1; j < n+1;j++){
-            a = ELMT(m, j, i);
-            b = ELMT(m, i, i);
-            ratio = a/b;
-
-            for (k=0; k<n+1; k++){
-                ELMT(m, j, k) = ELMT(m, j, k) 
-                    - ratio*ELMT(m, i, k);
-            }
-        }
-    }
-
-
-    for (i=0; i<n; i++) {
-        ratio = ELMT(m, i, i);
-        for (j=i; j<n+1; j++) {
-            ELMT(m, i, j) = ELMT(m, i, j)/ratio;
-        }
-    }
-
-
-    // Gauss Jordan Elimination (Matrik Eselon Terduksi)
-    for (i=n-1; i>=1; i--){
-
-        for (j=i-1; j>=0;j--){
-            a = ELMT(m, j, i);
-            b = ELMT(m, i, i);
-            ratio = a/b;
-
-            for (k=0; k<n+1; k++){
-                ELMT(m, j, k) = ELMT(m, j, k) 
-                    - ratio*ELMT(m, i, k);
-            }
-        }
-    }
+    // Gauss Jordan Elimination (Matriks Eselon Tereduksi)
+    m = OBETereduksi(m);
 
     for (i=0; i<n; i++) {
         x[i] = ELMT(m, i, n);
@@ -220,7 +244,7 @@ double gaussJordanEquation(Matrix m) {
 }
 
 
-double cramer (Matrix m) {
+void cramer (Matrix m) {
     Matrix mTemp;
     int n, i, j, k;
     // Matrix n x n untuk mencari determinan
@@ -264,6 +288,4 @@ double cramer (Matrix m) {
     for (i=1; i<=n; i++) {
         printf("x[%d] = %.1f\n", i, x[i]);
     }
-
-
 }
