@@ -3,15 +3,19 @@
 #include "boolean.h"
 #include "matrix.h"
 
-Matrix cofactor(Matrix m, Matrix *mTemp, int p, int q, int n) {
-    int i, j, a, b;
+Matrix cofactor(Matrix m, int p, int q) {
+    // p, q baris dan kolom dari cofactor
+    Matrix mTemp;
+    int i, j, a, b, n;
+    n = ROWS(m);
+    CreateMatrix(n-1, n-1, &mTemp);
     a = 0;
     b = 0;
 
     for (i = 0; i<n;i++) {
         for (j = 0; j<n;j++) {
             if (i != p && j != q) {
-                ELMT(*mTemp, a, b) = ELMT(m, i, j);
+                ELMT(mTemp, a, b) = ELMT(m, i, j);
                 b++;
                 if (b == n - 1) {
                     b = 0;
@@ -20,23 +24,60 @@ Matrix cofactor(Matrix m, Matrix *mTemp, int p, int q, int n) {
             }
         }
     }
+
+    return mTemp;
 }
 
-double determinantCofactor(Matrix m, int n) {
+void CreateMatrixIdentity(Matrix *m, int n) {
+    int i, j;
+    ROWS(*m) = n;
+    COLS(*m) = n;
+
+    for (i = 0; i<n; i++) {
+        for (j = 0; j<n; j++) {
+            if (i == j){
+                ELMT(*m, i, j) = 1;
+            } else {
+                ELMT(*m, i, j) = 0;
+            }
+        }
+    }
+}
+
+Matrix extendMatrix(Matrix m1, Matrix m2) {
+    // Prekondisi ROWS(m1) = ROWS(m2)
+    Matrix extend;
+    CreateMatrix(ROWS(m1), COLS(m1) + COLS(m2), &extend);
+    int i, j;
+
+    for (i=0; i<ROWS(m1); i++) {
+        for (j=0; j<(COLS(m1)+COLS(m2)); j++) {
+            if (j < COLS(m1)) {
+                ELMT(extend, i, j) = ELMT(m1, i, j);
+            } else {
+                ELMT(extend, i, j) = ELMT(m2, i, j-COLS(m1));
+            }
+        }
+    }
+    return extend;
+}
+
+double determinantCofactor(Matrix m) {
     double d = 0;
+    int n = ROWS(m);
 
     if (n == 1) {
         return ELMT(m, 0, 0);
 
     } else {
         Matrix mTemp;
-        CreateMatrix(n, n, &mTemp);
+        CreateMatrix(n-1, n-1, &mTemp);
         int sign = 1;
         int i;
 
         for (i=0; i<n;i++) {
-            cofactor(m, &mTemp, 0, i, n);
-            d += sign*ELMT(m, 0, i)*determinantCofactor(mTemp, n-1);
+            mTemp = cofactor(m, 0, i);
+            d += ELMT(m, 0, i)*determinantCofactor(mTemp)*sign;
             sign = -sign;
         }
 
@@ -62,7 +103,7 @@ double determinantOBE(Matrix m) {
         a = i;
         
         // Find the first non 0 index
-        while (ELMT(m, a, i) == 0 && a < n) {
+        while (a < n && ELMT(m, a, i) == 0) {
             a++;
         }
 
@@ -117,6 +158,11 @@ Matrix OBE(Matrix m){
             x++;
         }
 
+        // Elemen di diagonal utama == 0
+        if (x == row) {
+            continue;
+        }
+
         // Row Switching (between the i and non zero index)
         if (x != i) {
             for (j=0; j<col; j++) {
@@ -137,9 +183,6 @@ Matrix OBE(Matrix m){
                 ELMT(m, j, k) = ELMT(m, j, k) 
                     - ratio*ELMT(m, i, k);
             }
-            displayMatrix(m);
-            printf("\n");
-            printf("\n");
         }
     }
 
@@ -151,8 +194,6 @@ Matrix OBE(Matrix m){
             }
         }
     }
-
-    displayMatrix(m);
 
     return m;
 }
@@ -168,23 +209,23 @@ Matrix OBETereduksi(Matrix m){
 
     for (i=row-1; i>=1; i--){
 
-        for (j=i-1; j>=0;j--){
+        // Diagonal Utama ada elemen yang 0 maka tidak dilakukan operasi
+        if (ELMT(m, i, i) == 0) {
+            continue;
+        }
+
+        for (j=i-1; j>=0;j--) {
             a = ELMT(m, j, i);
             b = ELMT(m, i, i);
             ratio = a/b;
 
-            for (k=0; k<row+1; k++){
+            for (k=0; k<col+1; k++){
                 ELMT(m, j, k) = ELMT(m, j, k) 
                     - ratio*ELMT(m, i, k);
             }
-
-            displayMatrix(m);
-            printf("\n");
-            printf("\n");
+                
         }
     }    
-
-    displayMatrix(m);
 
     return m;
 }
@@ -262,7 +303,7 @@ void cramer (Matrix m) {
     // Inisialisasi det untuk x0
     detX[0] = determinantOBE(mTemp);
     if (detX[0] == 0) {
-        return 0;
+        printf("Tidak ada solusi\n");
     }
 
     // Mengganti tiap row dan insert determinan
@@ -276,10 +317,6 @@ void cramer (Matrix m) {
         detX[i+1] = determinantOBE(mTemp);
     }
 
-    // for (i=0; i<=n; i++) {
-    //     printf("Det x[%d] = %.1f\n", i, detX[0]);
-    // }
-
     // Cari tiap x dengan determminan yang telah didapat
     for (i=1; i<=n; i++){
         x[i] = (detX[i]/detX[0]);
@@ -289,3 +326,76 @@ void cramer (Matrix m) {
         printf("x[%d] = %.1f\n", i, x[i]);
     }
 }
+
+void inversOBE(Matrix *m) {
+    // Prekondisi isSquare
+    Matrix extend, identity;
+    int i, j, n;
+    boolean flag = true;
+    n = ROWS(*m);
+    CreateMatrix(n, 2*n, &extend);
+    CreateMatrixIdentity(&identity, n);
+
+    // Extend matrix dengan identitasnya
+    extend = extendMatrix(*m, identity);
+
+    // Operasi Gauss Jordan terhadap extended matrix
+    extend = OBETereduksi(extend);
+
+
+    for (i=0; i<n;i++){
+        if (ELMT(extend, i, i) == 0) {
+            printf("Tidak mempunyai invers");
+            flag = false;
+            break;
+        }
+    }
+
+    // Input hasil invers ke matrix m
+    if (flag) {
+        for (i=0; i<n;i++){
+            for (j=0; j<n; j++){
+                ELMT(*m, i, j) = ELMT(extend, i, j+n);
+            }
+        }
+    }
+
+    displayMatrix(*m);
+}
+
+
+void inversCofactor(Matrix *m) {
+    Matrix mTemp;
+    int i, j, n;
+    float sign, det;
+    sign = 1;
+    n = ROWS(*m);
+
+    if (determinantCofactor(*m)==0) {
+        printf("Tidak ada invers");
+    } else {
+
+    det = 1/(determinantCofactor(*m));
+    copyMatrix(*m, &mTemp);
+
+    // Matriks Cofactor
+    for (i=0; i<n; i++) {
+        for (j=0; j<n; j++){
+            ELMT(*m, i, j) = determinantCofactor(cofactor(mTemp, i, j))*sign;
+            sign *= -1;
+            // displayMatrix(cofactor(mTemp, i, j));
+            // printf("\n\n");
+        }
+        sign *= -1;
+    }
+
+    // Matriks Adjoin
+    transpose(m);
+    
+    // 1/det * adjoin
+    pMultiplyConst(m, det);
+    }
+
+}
+
+

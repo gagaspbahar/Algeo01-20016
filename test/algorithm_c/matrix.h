@@ -57,4 +57,10 @@ void displayMatrix(Matrix m);
 8 9 10
 */
 
+void pMultiplyConst(Matrix *m, float k);
+
+void copyMatrix(Matrix mIn, Matrix *mRes);
+
+void transpose(Matrix *m);
+
 #endif
