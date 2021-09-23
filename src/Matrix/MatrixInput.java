@@ -59,7 +59,7 @@ public class MatrixInput {
     public static Matrix Input(){
         Matrix m = new Matrix();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Pilih cara input matrix: \n");
+        System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
         System.out.println("2. Input dari file");
         int method = sc.nextInt();
