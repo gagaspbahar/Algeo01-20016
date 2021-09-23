@@ -6,11 +6,11 @@ public class Matrix {
 
     // Constructor
 
-    public void Matrix(){
+    public Matrix(){
         this.Row = 0;
         this.Col = 0;
     }
-    public void Matrix(int row, int col){
+    public Matrix(int row, int col){
         this.Row = row;
         this.Col = col;
         this.Contents = new double[row][col];
@@ -32,6 +32,11 @@ public class Matrix {
     public double getElmt(int i, int j){
         return this.Contents[i][j];
     }
+
+    public void setElmt(double x, int row, int col){
+        this.Contents[row][col] = x;
+    }
+        
 
     public boolean isSquare(Matrix m){
         return (this.Row == this.Col);
