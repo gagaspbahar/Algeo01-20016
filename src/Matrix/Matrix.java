@@ -199,5 +199,20 @@ public class Matrix {
         return (det/total);
     }
 
+    public Matrix transpose(){
+
+        int RowsM, ColsM, i ,j;
+        Matrix mTemp;
+        RowsM = this.Row; ColsM = this.Col;
+        mTemp = new Matrix(ColsM,RowsM);
+        for (i = 0; i< RowsM ;i++) {
+            for (j = 0; j< ColsM ;j++) {
+                mTemp.setElmt(this.getElmt(j, i), i, j);
+    }
     
+        }   
+
+        return mTemp;
+    }
+
 }
