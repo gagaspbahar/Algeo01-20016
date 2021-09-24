@@ -85,6 +85,30 @@ public class Operation {
     
         return M;
     }
+
+    public static Matrix extendMatrix(Matrix M1 , Matrix M2){
+        Matrix extend;
+        int RowsM1, ColsM1, RowsM2, ColsM2, i , j;
+        RowsM1 = M1.getRowLength();
+        ColsM1 = M1.getColLength();
+        RowsM2 = M2.getRowLength();
+        ColsM2 = M2.getColLength();
+
+        extend = new Matrix(RowsM1,ColsM1+ColsM2);
+        for (i=0; i<RowsM1; i++) {
+            for (j=0; j<(ColsM1 +ColsM2); j++) {
+                if (j < ColsM1) {
+                
+                    extend.setElmt(M1.getElmt(i, j), i, j);
+                } else {
+                    
+                    extend.setElmt(M2.getElmt(i, j-ColsM1), i, j);
+                }
+            }
+        }
+        return extend;
+
+    }
 }
 
 
