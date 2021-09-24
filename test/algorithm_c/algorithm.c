@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "boolean.h"
 #include "matrix.h"
+#include <math.h>
 
 Matrix cofactor(Matrix m, int p, int q) {
     // p, q baris dan kolom dari cofactor
@@ -382,8 +383,6 @@ void inversCofactor(Matrix *m) {
         for (j=0; j<n; j++){
             ELMT(*m, i, j) = determinantCofactor(cofactor(mTemp, i, j))*sign;
             sign *= -1;
-            // displayMatrix(cofactor(mTemp, i, j));
-            // printf("\n\n");
         }
         sign *= -1;
     }
@@ -395,6 +394,56 @@ void inversCofactor(Matrix *m) {
     pMultiplyConst(m, det);
     }
 
+}
+
+
+Matrix interpolate(Matrix m) {
+    // Input dalam bentuk [[x0, y0], [x1, y1], [x2, y2]...[xn, yn]]
+    Matrix mTemp;
+    int n, i, j;
+    n = ROWS(m);
+    CreateMatrix(n, n+1, &mTemp);
+    
+    // Ubah ke bentuk SPL(Augmented Matrix)
+    for (i=0; i<n; i++) {
+        for (j=0; j<n+1; j++) {
+            if (j == n) {
+                ELMT(mTemp, i, j) = ELMT(m, i, 1);
+            } else {
+                ELMT(mTemp, i, j) = pow(ELMT(m, i, 0), j);
+            }
+        }
+    }
+
+    // Lakukan operasi OBETereduksi
+    mTemp = OBETereduksi(mTemp);
+
+    // Karena gaada ADT Array, pake matrix dengan rows = 1
+    Matrix mAns;
+    CreateMatrix(1, n, &mAns);
+    for (i=0; i<n; i++) {
+        ELMT(mAns, 0, i) = ELMT(mTemp, i, n);
+    }
+
+    // mAns merupakan "array" yang bersifat sebagai koefisien dari
+    // polinomial derajat COLS(mAns)
+    return mAns;
+}
+
+double functionInterpolate(Matrix m, double x) {
+    // Menghitung f(x) dari hasil interpolasi dengan
+    // x sebagai parameter
+
+    int n, i;
+    double ans;
+    n = COLS(m);
+    ans = 0;
+
+    for (i=0;i<n;i++){
+        ans += ELMT(m, 0, i)*pow(x, i);
+    }
+
+    return ans;
 }
 
 
