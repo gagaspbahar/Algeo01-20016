@@ -1,6 +1,9 @@
 package Utility;
 
 import java.util.Scanner;
+
+import Algorithm.Gauss;
+import Algorithm.GaussJordan;
 import Matrix.*;
 
 public class Menu {
@@ -20,14 +23,19 @@ public class Menu {
         switch(choice){
             case 1:
                 SPLMenu();
+                break;
             case 2:
                 determinantMenu();
+                break;
             case 3:
                 inverseMenu();
+                break;
             case 4:
                 interpolateMenu();
+                break;
             case 5:
                 regressionMenu();
+                break;
             case 6:
                 exit();
         }
@@ -40,6 +48,29 @@ public class Menu {
         System.out.println("3. Metode matriks balikan");
         System.out.println("4. Kaidah Cramer");
         System.out.println();
+        int choice = sc.nextInt();
+        Matrix m;
+        double ans[] = {0};
+        String out = "";
+        m = MatrixInput.Input();
+        switch (choice){
+            case 1:
+                ans = Gauss.gaussEquation(m);
+                break;
+            case 2:
+                ans = GaussJordan.gaussJordanEquation(m);
+                break;
+               
+        }
+        for(int i = 0; i < ans.length; i++){
+            if (ans.length-1 == i){
+                out += "X " + (i+1) + " = " + ans[i];
+            }
+            else{
+                out += "X" + (i+1) + " = " + ans[i] + "\n";
+            }
+        }
+        System.out.print(out);
     }
 
     public static void determinantMenu(){
@@ -54,11 +85,13 @@ public class Menu {
             case 1:
                 det = m.determinantByOBE();
                 System.out.println("Determinan dari matriks adalah " + det);     
-                prompt(); 
+                prompt();
+                break; 
             case 2:
                 det = m.determinantCofactor();
                 System.out.println("Determinan dari matriks adalah " + det);     
                 prompt();
+                break;
         }
     }
 

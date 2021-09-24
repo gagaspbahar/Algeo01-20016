@@ -10,7 +10,7 @@ public class Operation {
         for(i=0;i<row;i++){
             x = i;
             //Find first non 0 index
-            while(M.getElmt(x, i) == 0 && x < row){
+            while(x < row && M.getElmt(x, i) == 0){
                 x++;
             }
             //Main diagonal element == 0
@@ -28,7 +28,8 @@ public class Operation {
                 }
             }
 
-            for (j = i+1; j<col; j++){
+            for (j = i+1; j<row; j++){
+                System.out.println(j + " " + i);
                 a = M.getElmt(j, i);
                 b = M.getElmt(i, i);
                 ratio = a/b;

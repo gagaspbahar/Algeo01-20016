@@ -174,7 +174,7 @@ Matrix OBE(Matrix m){
 
         }
 
-        for (j=i+1; j < col;j++){
+        for (j=i+1; j < row;j++){
             a = ELMT(m, j, i);
             b = ELMT(m, i, i);
             ratio = a/b;
