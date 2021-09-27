@@ -88,10 +88,9 @@ public class Operation {
 
     public static Matrix extendMatrix(Matrix M1 , Matrix M2){
         Matrix extend;
-        int RowsM1, ColsM1, RowsM2, ColsM2, i , j;
+        int RowsM1, ColsM1, ColsM2, i , j;
         RowsM1 = M1.getRowLength();
         ColsM1 = M1.getColLength();
-        RowsM2 = M2.getRowLength();
         ColsM2 = M2.getColLength();
 
         extend = new Matrix(RowsM1,ColsM1+ColsM2);
@@ -107,6 +106,17 @@ public class Operation {
             }
         }
         return extend;
+
+    }
+
+    public static void pMultiplyConst(Matrix M, double k){
+        int i,j, RowsM, ColsM;
+        RowsM = M.getRowLength(); ColsM = M.getColLength();
+        for (i=0; i<RowsM;i++) {
+            for (j=0; j<ColsM;j++) {
+                M.setElmt(M.getElmt(i, j)*k, i, j);
+            }
+        }
 
     }
 }
