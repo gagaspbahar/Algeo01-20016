@@ -29,7 +29,6 @@ public class Operation {
             }
 
             for (j = i+1; j<row; j++){
-                System.out.println(j + " " + i);
                 a = M.getElmt(j, i);
                 b = M.getElmt(i, i);
                 ratio = a/b;
@@ -79,7 +78,6 @@ public class Operation {
                 for (k=0; k<col+1; k++){
                     M.setElmt(M.getElmt(j, k) - ratio*M.getElmt(i, k), j, k);
                 }
-                    
             }
         }    
     

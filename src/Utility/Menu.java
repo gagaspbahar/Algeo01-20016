@@ -1,12 +1,10 @@
 package Utility;
 
-import java.util.Scanner;
-
 import Algorithm.*;
 import Matrix.*;
-
+import Main.*;
 public class Menu {
-    public static Scanner sc = new Scanner(System.in);
+    // public static Scanner sc = new Scanner(System.in);
 
     // Main menu
     public static void mainMenu(){
@@ -18,7 +16,7 @@ public class Menu {
         System.out.println("5. Regresi linier berganda");
         System.out.println("6. Keluar");
         System.out.println();
-        int choice = sc.nextInt();
+        int choice = Main.sc.nextInt();
 
         switch(choice){
             case 1:
@@ -39,7 +37,7 @@ public class Menu {
             case 6:
                 exit();
         }
-        sc.close();
+    //    Main.sc.close();
     }
 
     // SPL Menu
@@ -49,7 +47,7 @@ public class Menu {
         System.out.println("3. Metode matriks balikan");
         System.out.println("4. Kaidah Cramer");
         System.out.println();
-        int choice = sc.nextInt();
+        int choice = Main.sc.nextInt();
         Matrix m, ext;
         double[] ans = {0};
         String out = "";
@@ -67,7 +65,7 @@ public class Menu {
         }
         for(int i = 0; i < ans.length; i++){
             if (ans.length-1 == i){
-                out += "X " + (i+1) + " = " + ans[i];
+                out += "X" + (i+1) + " = " + ans[i];
             }
             else{
                 out += "X" + (i+1) + " = " + ans[i] + "\n";
@@ -81,7 +79,7 @@ public class Menu {
         System.out.println("1. Metode reduksi baris (Gauss)");
         System.out.println("2. Ekspansi kofaktor");
         System.out.println();
-        int choice = sc.nextInt();
+        int choice = Main.sc.nextInt();
         Matrix m;
         double det;
         m = MatrixInput.Input();
@@ -104,7 +102,7 @@ public class Menu {
         System.out.println("1. Metode eliminasi Gauss");
         System.out.println("2. Metode matriks adjoin");
         System.out.println();
-        int choice = sc.nextInt();
+        int choice = Main.sc.nextInt();
         Matrix m;
         Matrix ans = new Matrix();
         m = MatrixInput.Input();
@@ -143,7 +141,7 @@ public class Menu {
         }
         System.out.println(out);
         System.out.println("Masukkan input nilai fungsi yang ingin ditaksir: ");
-        double x = sc.nextDouble();
+        double x =Main.sc.nextDouble();
         double guess = Interpolate.functionInterpolate(ans, x);
         System.out.println("Hasil nilai taksiran f(" + x + ") = " + guess);
     }
@@ -156,7 +154,7 @@ public class Menu {
     // BENERIN PROMPTNYA !!! MSH NoSuchElementException
     public static void prompt(){
         System.out.println("Ingin menggunakan kalkulator lagi?");
-        String flag = sc.nextLine();
+        String flag = Main.sc.nextLine();
         if(flag == "y"){
             mainMenu();
         }
