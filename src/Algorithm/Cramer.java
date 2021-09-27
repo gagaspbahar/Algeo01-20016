@@ -2,7 +2,7 @@ package Algorithm;
 import Matrix.*;
 
 public class Cramer {
-    public static double[] crameralgo(Matrix M) {
+    public static double[] cramerAlgo(Matrix M) {
 
     Matrix mTemp;
     int n, i, j;

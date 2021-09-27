@@ -59,6 +59,11 @@ public class Menu {
             case 2:
                 ans = GaussJordan.gaussJordanEquation(m);
                 break;
+            case 3:
+                break;
+            case 4:
+                ans = Cramer.cramerAlgo(m);
+                break;
                
         }
         for(int i = 0; i < ans.length; i++){
@@ -95,6 +100,7 @@ public class Menu {
                 prompt();
                 break;
         }
+
     }
 
     // Inverse Menu

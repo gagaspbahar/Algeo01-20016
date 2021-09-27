@@ -116,6 +116,31 @@ public class Operation {
         }
 
     }
+    
+    public static Matrix multiplyMatrix(Matrix m1, Matrix m2){
+        int row = m1.getRowLength();
+        int col = m2.getColLength();
+        Matrix ans = new Matrix(row, col);
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < col; j++){
+                int temp = 0;
+                for(int k = 0; k < m1.getColLength(); k++){
+                    temp += m1.getElmt(i,k) * m2.getElmt(k,j);
+                }
+                ans.setElmt(temp,i,j);
+            }
+        }
+        return ans;
+    }
+
+    public static Matrix cutRight(Matrix m){
+        Matrix ans = new Matrix(m.getRowLength(), 1);
+        int col = m.getColLength();
+        for(int i = 0; i < ans.getRowLength(); i++){
+            ans.setElmt(m.getElmt(i, col-1), i, 0);
+        }
+        return ans;
+    }
 }
 
 
