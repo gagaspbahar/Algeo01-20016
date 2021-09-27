@@ -72,6 +72,7 @@ public class Menu {
             }
         }
         System.out.print(out);
+        prompt();
     }
 
     // Determinant Menu
@@ -116,6 +117,7 @@ public class Menu {
         }
         System.out.println("Matriks balikan dari matriks input adalah: ");
         ans.displayMatrix();
+        prompt();
     }
 
     // Interpolate Menu
@@ -144,6 +146,7 @@ public class Menu {
         double x =Main.sc.nextDouble();
         double guess = Interpolate.functionInterpolate(ans, x);
         System.out.println("Hasil nilai taksiran f(" + x + ") = " + guess);
+        prompt();
     }
 
     // Regression menu
@@ -154,8 +157,9 @@ public class Menu {
     // BENERIN PROMPTNYA !!! MSH NoSuchElementException
     public static void prompt(){
         System.out.println("Ingin menggunakan kalkulator lagi?");
+        Main.sc.nextLine();
         String flag = Main.sc.nextLine();
-        if(flag == "y"){
+        if(flag.equals("y")){
             mainMenu();
         }
         else{
