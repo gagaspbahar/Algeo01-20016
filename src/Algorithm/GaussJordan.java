@@ -3,8 +3,6 @@ import Matrix.*;
 
 
 public class GaussJordan {
-    
-
     public static double[] gaussJordanEquation(Matrix M) {
         // Untuk case yang hasilnya tidak parametrik
         int i, n;

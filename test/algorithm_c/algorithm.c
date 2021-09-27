@@ -45,22 +45,22 @@ void CreateMatrixIdentity(Matrix *m, int n) {
     }
 }
 
-Matrix extendMatrix(Matrix m1, Matrix m2) {
+Matrix augmentMatrix(Matrix m1, Matrix m2) {
     // Prekondisi ROWS(m1) = ROWS(m2)
-    Matrix extend;
-    CreateMatrix(ROWS(m1), COLS(m1) + COLS(m2), &extend);
+    Matrix augment;
+    CreateMatrix(ROWS(m1), COLS(m1) + COLS(m2), &augment);
     int i, j;
 
     for (i=0; i<ROWS(m1); i++) {
         for (j=0; j<(COLS(m1)+COLS(m2)); j++) {
             if (j < COLS(m1)) {
-                ELMT(extend, i, j) = ELMT(m1, i, j);
+                ELMT(augment, i, j) = ELMT(m1, i, j);
             } else {
-                ELMT(extend, i, j) = ELMT(m2, i, j-COLS(m1));
+                ELMT(augment, i, j) = ELMT(m2, i, j-COLS(m1));
             }
         }
     }
-    return extend;
+    return augment;
 }
 
 double determinantCofactor(Matrix m) {
@@ -329,22 +329,22 @@ void cramer (Matrix m) {
 
 void inversOBE(Matrix *m) {
     // Prekondisi isSquare
-    Matrix extend, identity;
+    Matrix augment, identity;
     int i, j, n;
     boolean flag = true;
     n = ROWS(*m);
-    CreateMatrix(n, 2*n, &extend);
+    CreateMatrix(n, 2*n, &augment);
     CreateMatrixIdentity(&identity, n);
 
-    // Extend matrix dengan identitasnya
-    extend = extendMatrix(*m, identity);
+    // augment matrix dengan identitasnya
+    augment = augmentMatrix(*m, identity);
 
-    // Operasi Gauss Jordan terhadap extended matrix
-    extend = OBETereduksi(extend);
+    // Operasi Gauss Jordan terhadap augmented matrix
+    augment = OBETereduksi(augment);
 
 
     for (i=0; i<n;i++){
-        if (ELMT(extend, i, i) == 0) {
+        if (ELMT(augment, i, i) == 0) {
             printf("Tidak mempunyai invers");
             flag = false;
             break;
@@ -355,7 +355,7 @@ void inversOBE(Matrix *m) {
     if (flag) {
         for (i=0; i<n;i++){
             for (j=0; j<n; j++){
-                ELMT(*m, i, j) = ELMT(extend, i, j+n);
+                ELMT(*m, i, j) = ELMT(augment, i, j+n);
             }
         }
     }
@@ -446,4 +446,48 @@ double functionInterpolate(Matrix m, double x) {
     return ans;
 }
 
+
+void regression(Matrix m) {
+    // Nerima matrix dengan bentuk x1 + x2 + .. + xn = y
+    Matrix mReg;
+    int n ,row, col, i, j, k;
+    n = ROWS(m);
+    row = COLS(m);
+    col = COLS(m) + 1;
+    CreateMatrix(row, col, &mReg);
+
+    // Augment matrix menjadi bentuk x0 + x1 + x2 + .. + xn = y
+    Matrix x0;
+    CreateMatrix(n, 1, &x0);
+    // Inisiasi x0 dengan elemennya 1 semua
+    for (i = 0; i<n; i++) {
+        ELMT(x0, i, 1) = 1;
+    }
+    // Augment dengan m
+    m = augmentMatrix(x0, m);
+
+    // Isi Matrix dengan Normal Estimation Equation
+    for (i=0; i<row; i++) {
+        for (j=0; j<col; j++) {
+            double temp;
+            temp = 0;
+
+            for (k=0; k<n; k++) {
+                if (i == 0 && j == 0) {
+                    temp += 1;
+                } else if (i == 0) {
+                    temp += ELMT(m, k, j);
+                } else if (j == 0) {
+                    temp += ELMT(m, k, i);
+                } else {
+                    temp += ELMT(m, k, i)*ELMT(m, k, j);
+                }
+            }
+            ELMT(mReg, i, j) = temp;
+        }
+    }
+
+    // Diselesaikan dengan GaussJordan
+    gaussJordanEquation(mReg);
+}
 
