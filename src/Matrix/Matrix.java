@@ -28,6 +28,7 @@ public class Matrix {
     public Matrix(int n){
         this.Row = n;
         this.Col = n;
+        this.Contents = new double[n][n];
         for (int i = 0; i < n; i++){
             for (int j = 0; j < n; j++){
                 if (i == j){
@@ -202,7 +203,7 @@ public class Matrix {
         for (i = 0; i<n;i++) {
             det *= getElmt(i, i);
         }
-        
+
         return (det/total);
     }
 
