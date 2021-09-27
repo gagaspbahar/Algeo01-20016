@@ -47,16 +47,25 @@ public class MatrixInput {
     // Input b (SPL only, from console)
     public static Matrix SPLInput(){
         // Scanner sc = new Scanner(System.in);
-        Matrix m;
-        m = consoleInput();
-        int row = m.getRowLength();
-        Matrix ext = new Matrix(row, 1);
-        System.out.println("Masukkan hasil dari persamaan SPL: ");
-        for(int i = 0; i < row; i++){
-            double x = Main.sc.nextDouble();
-            ext.setElmt(x, i, 0);
+        Matrix m = new Matrix();
+        System.out.println("Pilih cara input matrix:");
+        System.out.println("1. Input keyboard");
+        System.out.println("2. Input dari file");
+        int method = Main.sc.nextInt();
+        if(method == 1){
+            m = consoleInput();
+            int row = m.getRowLength();
+            Matrix ext = new Matrix(row, 1);
+            System.out.println("Masukkan hasil dari persamaan SPL: ");
+            for(int i = 0; i < row; i++){
+                double x = Main.sc.nextDouble();
+                ext.setElmt(x, i, 0);
+            }
+            m = Operation.extendMatrix(m, ext);
         }
-        m = Operation.extendMatrix(m, ext);
+        else if(method == 2){
+            m = fileInput();
+        }
         return m;
     }
 
@@ -66,7 +75,6 @@ public class MatrixInput {
             // Scanner sc = new Scanner(System.in);
             System.out.println("Masukkan nama file berisi matriks:");
             String filename = Main.sc.next();
-            Main.sc.close();
             String path = "test\\" + filename;
             File file = new File(path);
             // File file = new File("test\\mat.txt");
