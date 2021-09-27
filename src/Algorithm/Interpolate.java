@@ -46,10 +46,10 @@ public class Interpolate {
         n =  M.getColLength();
         ans = 0;
 
-    for (i=0;i<n;i++){
-        ans += M.getElmt(0, i) * Math.pow(x,i);
-    }
+        for (i=0;i<n;i++){
+            ans += M.getElmt(0, i) * Math.pow(x,i);
+        }
 
-    return ans;
+        return ans;
     }
 }

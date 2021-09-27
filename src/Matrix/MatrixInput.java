@@ -21,6 +21,19 @@ public class MatrixInput {
         sc.close();
         return m;
     }
+
+    public static Matrix bInput(int row){
+        Scanner sc = new Scanner(System.in);
+        Matrix m = new Matrix(row, 1);
+        System.out.println("Masukkan hasil dari persamaan SPL: ");
+        for(int i = 0; i < row; i++){
+            double x = sc.nextDouble();
+            m.setElmt(x, i, 0);
+        }
+        sc.close();
+        return m;
+    }
+
     public static Matrix fileInput(){
         try{
             Scanner sc = new Scanner(System.in);
@@ -56,6 +69,7 @@ public class MatrixInput {
             return m;
         }        
     }
+
     public static Matrix Input(){
         Matrix m = new Matrix();
         Scanner sc = new Scanner(System.in);

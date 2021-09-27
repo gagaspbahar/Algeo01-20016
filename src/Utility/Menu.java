@@ -2,8 +2,7 @@ package Utility;
 
 import java.util.Scanner;
 
-import Algorithm.Gauss;
-import Algorithm.GaussJordan;
+import Algorithm.*;
 import Matrix.*;
 
 public class Menu {
@@ -49,10 +48,12 @@ public class Menu {
         System.out.println("4. Kaidah Cramer");
         System.out.println();
         int choice = sc.nextInt();
-        Matrix m;
-        double ans[] = {0};
+        Matrix m, ext;
+        double[] ans = {0};
         String out = "";
         m = MatrixInput.Input();
+        ext = MatrixInput.bInput(m.getRowLength());
+        m = Operation.extendMatrix(m, ext);
         switch (choice){
             case 1:
                 ans = Gauss.gaussEquation(m);
@@ -99,10 +100,43 @@ public class Menu {
         System.out.println("1. Metode eliminasi Gauss");
         System.out.println("2. Metode matriks adjoin");
         System.out.println();
+        int choice = sc.nextInt();
+        Matrix m;
+        Matrix ans = new Matrix();
+        m = MatrixInput.Input();
+        switch (choice){
+            case 1:
+                ans = Invers.inversOBE(m);
+                break;
+            case 2:
+                ans = Invers.inversCofactor(m);
+                break;
+        }
+        System.out.println("Matriks balikan dari matriks input adalah: ");
+        ans.displayMatrix();
     }
 
     public static void interpolateMenu(){
-
+        Matrix m;
+        double[] ans = {0};
+        m = MatrixInput.Input();
+        Interpolate.interpolateAlg(m);
+        System.out.println("Hasil dari interpolasi adalah: ");
+        String out = "";
+        int len = m.getColLength();
+        out += ans[0] + " +";
+        for (int i = 1; i < len; i++){
+            if (i==1){
+                out += " " + ans[1] + "x +";
+            }
+            else if(i == len-1){
+                out += " " + ans[i] + "x^" + i; 
+            }
+            else{
+                out += " " + ans[i] + "x^" + i + " +";
+            }
+        }
+        System.out.println(out);
     }
 
     public static void regressionMenu(){
