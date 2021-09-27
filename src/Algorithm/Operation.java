@@ -56,7 +56,7 @@ public class Operation {
     }
 
     public static Matrix OBETereduksi(Matrix M){
-        int i, j, k,row, col;
+        int i, j, k, row, col;
         double a, b, ratio;
         M = OBE(M);
     
@@ -75,12 +75,11 @@ public class Operation {
                 b = M.getElmt(i, i);
                 ratio = a/b;
     
-                for (k=0; k<col+1; k++){
+                for (k=0; k<col; k++){
                     M.setElmt(M.getElmt(j, k) - ratio*M.getElmt(i, k), j, k);
                 }
             }
         }    
-    
         return M;
     }
 

@@ -1,5 +1,8 @@
 package Matrix;
 import java.util.Scanner;
+
+import Algorithm.Operation;
+
 import java.io.*;
 import Main.*;
 public class MatrixInput {
@@ -42,15 +45,18 @@ public class MatrixInput {
     }
 
     // Input b (SPL only, from console)
-    public static Matrix bInput(int row){
+    public static Matrix SPLInput(){
         // Scanner sc = new Scanner(System.in);
-        Matrix m = new Matrix(row, 1);
+        Matrix m;
+        m = consoleInput();
+        int row = m.getRowLength();
+        Matrix ext = new Matrix(row, 1);
         System.out.println("Masukkan hasil dari persamaan SPL: ");
         for(int i = 0; i < row; i++){
             double x = Main.sc.nextDouble();
-            m.setElmt(x, i, 0);
+            ext.setElmt(x, i, 0);
         }
-        // sc.close();
+        m = Operation.extendMatrix(m, ext);
         return m;
     }
 

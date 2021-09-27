@@ -48,12 +48,10 @@ public class Menu {
         System.out.println("4. Kaidah Cramer");
         System.out.println();
         int choice = Main.sc.nextInt();
-        Matrix m, ext;
+        Matrix m;
         double[] ans = {0};
         String out = "";
-        m = MatrixInput.Input();
-        ext = MatrixInput.bInput(m.getRowLength());
-        m = Operation.extendMatrix(m, ext);
+        m = MatrixInput.SPLInput();
         switch (choice){
             case 1:
                 ans = Gauss.gaussEquation(m);
@@ -72,6 +70,7 @@ public class Menu {
             }
         }
         System.out.print(out);
+        System.out.println();
         prompt();
     }
 
@@ -143,7 +142,7 @@ public class Menu {
         }
         System.out.println(out);
         System.out.println("Masukkan input nilai fungsi yang ingin ditaksir: ");
-        double x =Main.sc.nextDouble();
+        double x = Main.sc.nextDouble();
         double guess = Interpolate.functionInterpolate(ans, x);
         System.out.println("Hasil nilai taksiran f(" + x + ") = " + guess);
         prompt();
@@ -151,14 +150,33 @@ public class Menu {
 
     // Regression menu
     public static void regressionMenu(){
-
+        Matrix m;
+        double[] ans = {0};
+        m = MatrixInput.Input();
+        Regression.regressionAlgo(m);
+        System.out.println("Hasil dari regresi berganda adalah: ");
+        String out = "";
+        int len = m.getColLength();
+        out += ans[0] + " +";
+        for (int i = 1; i < len; i++){
+            if (i==1){
+                out += " " + ans[1] + "x +";
+            }
+            else if(i == len-1){
+                out += " " + ans[i] + "x^" + i; 
+            }
+            else{
+                out += " " + ans[i] + "x^" + i + " +";
+            }
+        }
+        System.out.println(out);
+        prompt();
     }
 
-    // BENERIN PROMPTNYA !!! MSH NoSuchElementException
     public static void prompt(){
-        System.out.println("Ingin menggunakan kalkulator lagi?");
+        System.out.println("Ingin menggunakan kalkulator lagi? (y/n)");
         Main.sc.nextLine();
-        String flag = Main.sc.nextLine();
+        String flag = Main.sc.nextLine().toLowerCase();
         if(flag.equals("y")){
             mainMenu();
         }
