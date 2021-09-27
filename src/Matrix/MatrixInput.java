@@ -4,6 +4,26 @@ import java.util.Scanner;
 import java.io.*;
 
 public class MatrixInput {
+    
+    // Input prompt
+    public static Matrix Input(){
+        Matrix m = new Matrix();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Pilih cara input matrix:");
+        System.out.println("1. Input keyboard");
+        System.out.println("2. Input dari file");
+        int method = sc.nextInt();
+        if(method == 1){
+            m = consoleInput();
+        }
+        else if(method == 2){
+            m = fileInput();
+        }
+        sc.close();
+        return m;
+    }
+
+    // Input from console
     public static Matrix consoleInput(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Masukkan jumlah baris: ");
@@ -22,6 +42,7 @@ public class MatrixInput {
         return m;
     }
 
+    // Input b (SPL only, from console)
     public static Matrix bInput(int row){
         Scanner sc = new Scanner(System.in);
         Matrix m = new Matrix(row, 1);
@@ -34,6 +55,7 @@ public class MatrixInput {
         return m;
     }
 
+    // Input Matrix from file
     public static Matrix fileInput(){
         try{
             Scanner sc = new Scanner(System.in);
@@ -68,22 +90,5 @@ public class MatrixInput {
             Matrix m = new Matrix();
             return m;
         }        
-    }
-
-    public static Matrix Input(){
-        Matrix m = new Matrix();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Pilih cara input matrix:");
-        System.out.println("1. Input keyboard");
-        System.out.println("2. Input dari file");
-        int method = sc.nextInt();
-        if(method == 1){
-            m = consoleInput();
-        }
-        else if(method == 2){
-            m = fileInput();
-        }
-        sc.close();
-        return m;
     }
 }

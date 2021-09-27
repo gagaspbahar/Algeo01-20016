@@ -8,6 +8,7 @@ import Matrix.*;
 public class Menu {
     public static Scanner sc = new Scanner(System.in);
 
+    // Main menu
     public static void mainMenu(){
         System.out.println("Selamat datang di Matrix Calculator Mang DODZ. Silahkan pilih menu:\n");
         System.out.println("1. Sistem Persamaan Linier");
@@ -41,6 +42,7 @@ public class Menu {
         sc.close();
     }
 
+    // SPL Menu
     public static void SPLMenu(){
         System.out.println("1. Metode eliminasi Gauss");
         System.out.println("2. Metode eliminasi Gauss-Jordan");
@@ -74,6 +76,7 @@ public class Menu {
         System.out.print(out);
     }
 
+    // Determinant Menu
     public static void determinantMenu(){
         System.out.println("1. Metode reduksi baris (Gauss)");
         System.out.println("2. Ekspansi kofaktor");
@@ -96,6 +99,7 @@ public class Menu {
         }
     }
 
+    // Inverse Menu
     public static void inverseMenu(){
         System.out.println("1. Metode eliminasi Gauss");
         System.out.println("2. Metode matriks adjoin");
@@ -116,6 +120,7 @@ public class Menu {
         ans.displayMatrix();
     }
 
+    // Interpolate Menu
     public static void interpolateMenu(){
         Matrix m;
         double[] ans = {0};
@@ -137,8 +142,13 @@ public class Menu {
             }
         }
         System.out.println(out);
+        System.out.println("Masukkan input nilai fungsi yang ingin ditaksir: ");
+        double x = sc.nextDouble();
+        double guess = Interpolate.functionInterpolate(ans, x);
+        System.out.println("Hasil nilai taksiran f(" + x + ") = " + guess);
     }
 
+    // Regression menu
     public static void regressionMenu(){
 
     }
@@ -155,6 +165,7 @@ public class Menu {
             
         }
     }
+    // Exit function with return code 0
     public static void exit(){
         System.exit(0);
     }

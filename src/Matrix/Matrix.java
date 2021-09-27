@@ -51,6 +51,7 @@ public class Matrix {
         }
     }
 
+    // Displaying Matrix
     public void displayMatrix(){
         for (int i = 0; i < this.Row; i++){
             for (int j = 0; j < this.Col; j++){
@@ -75,6 +76,9 @@ public class Matrix {
         return mCopy;
     }
 
+    // *****GETTER*****
+
+    // Element Getter
     public double getElmt(int i, int j){
         return this.Contents[i][j];
     }
@@ -87,6 +91,7 @@ public class Matrix {
         return this.Col;
     }
     
+    // Element Selector
     public void setElmt(double x, int row, int col){
         this.Contents[row][col] = x;
     }
@@ -95,6 +100,7 @@ public class Matrix {
         return (this.Row == this.Col);
     }
 
+    // Returning the Cofactor Matrix
     public Matrix cofactor(int p, int q) {
         // p, q baris dan kolom dari cofactor
         int i, j, a, b, n;
@@ -119,6 +125,7 @@ public class Matrix {
         return mTemp;
     }
 
+    // Determinant from Cofactor
     public double determinantCofactor() {
         double d = 0;
         int n = this.Row;
@@ -141,6 +148,7 @@ public class Matrix {
         }
     }
 
+    // Determinant from OBE
     public double determinantByOBE(){
         int a, i, j, k, n;
         double num1, num2, num3, temp;
@@ -194,13 +202,12 @@ public class Matrix {
         for (i = 0; i<n;i++) {
             det *= getElmt(i, i);
         }
-    
-    
+        
         return (det/total);
     }
 
+    // Returning transpose
     public Matrix transpose(){
-
         int RowsM, ColsM, i ,j;
         Matrix mTemp;
         RowsM = this.Row; ColsM = this.Col;
@@ -208,11 +215,8 @@ public class Matrix {
         for (i = 0; i< RowsM ;i++) {
             for (j = 0; j< ColsM ;j++) {
                 mTemp.setElmt(this.getElmt(j, i), i, j);
-    }
-    
+            }
         }   
-
         return mTemp;
     }
-
 }

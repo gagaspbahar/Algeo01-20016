@@ -37,17 +37,17 @@ public class Interpolate {
         return ans;
     }
 
-    public static double functionInterpolate(Matrix M, double x){
+    public static double functionInterpolate(double[] ar, double x){
          // Menghitung f(x) dari hasil interpolasi dengan
         // x sebagai parameter
 
         int n, i;
         double ans;
-        n =  M.getColLength();
+        n =  ar.length;
         ans = 0;
 
         for (i=0;i<n;i++){
-            ans += M.getElmt(0, i) * Math.pow(x,i);
+            ans += ar[i] * Math.pow(x,i);
         }
 
         return ans;

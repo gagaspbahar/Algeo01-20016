@@ -21,6 +21,6 @@ public class Output {
     }
 
     public void detToFile(){
-
+        
     }
 }
