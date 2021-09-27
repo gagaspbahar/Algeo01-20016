@@ -105,14 +105,14 @@ public class Matrix {
         // p, q baris dan kolom dari cofactor
         int i, j, a, b, n;
         n = this.Row;
-        Matrix mTemp = new Matrix(n);
+        Matrix mTemp = new Matrix(n-1);
         a = 0;
         b = 0;
     
         for (i = 0; i<n;i++) {
             for (j = 0; j<n;j++) {
                 if (i != p && j != q) {
-                    mTemp.setElmt(getElmt(i, j), a, b);
+                    mTemp.setElmt(this.getElmt(i, j), a, b);
                     b++;
                     if (b == n - 1) {
                         b = 0;
@@ -131,7 +131,7 @@ public class Matrix {
         int n = this.Row;
     
         if (n == 1) {
-            return getElmt(0,0);
+            return this.getElmt(0,0);
     
         } else {
             Matrix mTemp = new Matrix(n-1);
