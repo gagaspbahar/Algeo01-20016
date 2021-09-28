@@ -130,10 +130,10 @@ public class Menu {
         Matrix m;
         double[] ans = {0};
         m = MatrixInput.Input();
-        Interpolate.interpolateAlg(m);
+        ans = Interpolate.interpolateAlg(m);
         System.out.println("Hasil dari interpolasi adalah: ");
         String out = "";
-        int len = m.getColLength();
+        int len = m.getRowLength();
         out += ans[0] + " +";
         for (int i = 1; i < len; i++){
             if (i==1){
@@ -159,20 +159,17 @@ public class Menu {
         Matrix m;
         double[] ans = {0};
         m = MatrixInput.Input();
-        Regression.regressionAlgo(m);
+        ans = Regression.regressionAlgo(m);
         System.out.println("Hasil dari regresi berganda adalah: ");
         String out = "";
         int len = m.getColLength();
         out += ans[0] + " +";
         for (int i = 1; i < len; i++){
-            if (i==1){
-                out += " " + ans[1] + "x +";
-            }
-            else if(i == len-1){
-                out += " " + ans[i] + "x^" + i; 
+            if(i == len-1){
+                out += " " + ans[i] + "x" + i; 
             }
             else{
-                out += " " + ans[i] + "x^" + i + " +";
+                out += " " + ans[i] + "x" + i + " +";
             }
         }
         System.out.println(out);

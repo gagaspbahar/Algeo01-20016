@@ -14,7 +14,7 @@ public class Interpolate {
         for (i=0; i<n; i++) {
             for (j=0; j<n+1; j++) {
                 if (j == n) {
-                    mTemp.setElmt(M.getElmt(i, j), i, j);
+                    mTemp.setElmt(M.getElmt(i, 1), i, j);
                 } else {
                     mTemp.setElmt(Math.pow(M.getElmt(i, 0), j), i, j);
                 }
@@ -28,7 +28,6 @@ public class Interpolate {
         double[] ans;
         ans = new double[n];
         for (i=0; i<n; i++) {
-
             ans[i] = mTemp.getElmt(i, n);
         }
 

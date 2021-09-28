@@ -15,6 +15,6 @@ int main() {
     readMatrix(&m1, m, n);
     printf("\n");
     // displayMatrix(OBE(m1));
-    regression(m1);
+    cramer(m1);
 
 }

@@ -44,7 +44,7 @@ public class Invers {
     }
 
     public static Matrix inversCofactor(Matrix M){
-        Matrix mTemp,mRes,mcofactor;
+        Matrix mTemp,mRes,mCofactor;
         int i,j,n;
         double sign,det;
         
@@ -58,20 +58,23 @@ public class Invers {
             return null;
         }
         else{
-            det = 1/M.determinantCofactor() ;
-            mTemp = M.copyMatrix(M);
+            det = 1/M.determinantCofactor();
+            mTemp = new Matrix(n, n);
+            mTemp.copyMatrix(M);
            
             // Matriks Cofactor
-            mcofactor = new Matrix(n,n);
-            mcofactor = mTemp.cofactor(n,n);
-            for(i = 0; i <n ; i++)
+            mCofactor = new Matrix(n-1,n-1);
+            for(i=0;i<n;i++)
                 for(j=0;j<n;j++){
-                    mRes.setElmt(mcofactor.determinantCofactor() * sign, i, j) ;
+                    mCofactor = mTemp.cofactor(i, j);
+                    // mCofactor.displayMatrix();
+                    mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j) ;
                     sign *= -1;
                 }
-                sign += 1;
+                sign *= -1;
             }
-            mRes.transpose();
+
+            mRes = mRes.transpose();
             Operation.pMultiplyConst(mRes, det);
             
             return mRes;

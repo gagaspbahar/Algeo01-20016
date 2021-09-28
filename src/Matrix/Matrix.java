@@ -67,14 +67,12 @@ public class Matrix {
         }
     }
 
-    public Matrix copyMatrix(Matrix m){
-        Matrix mCopy = new Matrix(m.Row, m.Col);
+    public void copyMatrix(Matrix m){
         for (int i = 0; i<m.Row;i++){
             for (int j = 0; j<m.Col;j++){
                 setElmt(m.getElmt(i, j), i, j);
             }
         }
-        return mCopy;
     }
 
     // *****GETTER*****
