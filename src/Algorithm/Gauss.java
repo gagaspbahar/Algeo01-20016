@@ -12,6 +12,7 @@ public class Gauss {
 
         //Gauss Elimination
         M = Operation.OBE(M);
+        M.displayMatrix();
 
         //Backward Substitution
         x[n-1] = M.getElmt(n-1, n)/M.getElmt(n-1, n-1);

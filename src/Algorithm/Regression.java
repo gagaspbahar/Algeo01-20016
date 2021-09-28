@@ -16,10 +16,11 @@ public class Regression {
         x0 = new Matrix(n, 1);
         // Inisiasi x0 dengan elemennya 1 semua
         for (i = 0; i<n; i++) {
-            M.setElmt(1, i, 1);
+            x0.setElmt(1, i, 0);
         }
         // Augment dengan m
         M = Operation.extendMatrix(x0, M);
+
 
         // Isi Matrix dengan Normal Estimation Equation
         for (i=0; i<row; i++) {
@@ -42,6 +43,7 @@ public class Regression {
             }
         }
 
+        mReg.displayMatrix();
         //Selesaikan dengan GaussJordan
         return GaussJordan.gaussJordanEquation(mReg);
     }

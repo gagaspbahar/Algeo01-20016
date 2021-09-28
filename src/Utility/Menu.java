@@ -67,9 +67,10 @@ public class Menu {
                 break;
                
         }
+
         for(int i = 0; i < ans.length; i++){
             if (ans.length-1 == i){
-                out += "X" + (i+1) + " = " + ans[i];
+                out += "X" + (i+1) + " = " + ans[i]; 
             }
             else{
                 out += "X" + (i+1) + " = " + ans[i] + "\n";
@@ -101,7 +102,6 @@ public class Menu {
                 prompt();
                 break;
         }
-
     }
 
     // Inverse Menu

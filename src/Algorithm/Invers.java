@@ -69,7 +69,7 @@ public class Invers {
                 for(j=0;j<n;j++){
                 mCofactor = mTemp.cofactor(i, j);
                 // mCofactor.displayMatrix();
-                mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j) ;
+                mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j);
                 sign *= -1;
             }
             sign *= -1;

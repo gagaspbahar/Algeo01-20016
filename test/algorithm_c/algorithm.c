@@ -488,7 +488,7 @@ void regression(Matrix m) {
     }
 
     // Diselesaikan dengan GaussJordan
-    gaussJordanEquation(mReg);
     displayMatrix(mReg);
+    gaussJordanEquation(mReg);
 }
 
