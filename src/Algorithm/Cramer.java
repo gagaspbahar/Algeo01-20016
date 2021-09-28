@@ -1,6 +1,5 @@
 package Algorithm;
 import Matrix.*;
-import jdk.swing.interop.DispatcherWrapper;
 
 public class Cramer {
     public static double[] cramerAlgo(Matrix M) {

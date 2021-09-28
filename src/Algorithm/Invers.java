@@ -96,7 +96,7 @@ public class Invers {
             }
         }
         
-        Mres = Operation.multiplyMatrix(inversOBE(Mtemp),Mb);
+        Mres = Operation.multiplyMatrix(inversCofactor(Mtemp),Mb);
         for (int i = 0; i < row; i++){
             res[i] = Mres.getElmt(i, 0);
         }
