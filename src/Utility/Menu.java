@@ -60,6 +60,7 @@ public class Menu {
                 ans = GaussJordan.gaussJordanEquation(m);
                 break;
             case 3:
+                ans = Invers.inversSPL(m);
                 break;
             case 4:
                 ans = Cramer.cramerAlgo(m);
