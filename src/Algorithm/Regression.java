@@ -45,4 +45,22 @@ public class Regression {
         //Selesaikan dengan GaussJordan
         return GaussJordan.gaussJordanEquation(mReg);
     }
+
+    public static double functionRegression(double[] arrX, double[] inputX) {
+        // arrX merupakan array yang dikeluarkan dari fungsi regression
+        // inputX sebanyak k sebagai input nilai x untuk mengecek nilai fungsi
+        double ans;
+        int i, n;
+        n = inputX.length;
+
+        // Inisialiasasi untuk x0 dari fungsi regresi
+        ans = arrX[0];
+
+        // Menghasilkan ans berdasarkan operasi fungsi
+        for (i=0;i<n;i++) {
+            ans += arrX[i+1]*inputX[i];
+        }
+        
+        return ans;
+    }
 }

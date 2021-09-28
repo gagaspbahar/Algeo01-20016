@@ -166,10 +166,10 @@ public class Menu {
         out += ans[0] + " +";
         for (int i = 1; i < len; i++){
             if(i == len-1){
-                out += " " + ans[i] + "x" + i; 
+                out += " " + ans[i] + "*x" + i; 
             }
             else{
-                out += " " + ans[i] + "x" + i + " +";
+                out += " " + ans[i] + "*x" + i + " +";
             }
         }
         System.out.println(out);
