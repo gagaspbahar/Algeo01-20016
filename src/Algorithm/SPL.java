@@ -1,5 +1,6 @@
 package Algorithm;
 import Matrix.*;
+import Utility.*;
 
 public class SPL {
     private boolean noSolutions;
@@ -30,6 +31,9 @@ public class SPL {
             case 4:
                 ans = cramerAlgo();
                 break;
+            default:
+                System.out.println("Pilihan tidak valid. Mengembalikan ke menu awal.");
+                Menu.SPLMenu();
         }
         this.solution = ans;
         return ans;

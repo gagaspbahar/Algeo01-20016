@@ -1,6 +1,6 @@
 package Matrix;
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 import Algorithm.Operation;
 
 import java.io.*;
@@ -14,7 +14,27 @@ public class MatrixInput {
         System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
         System.out.println("2. Input dari file");
-        int method = Main.sc.nextInt();
+        int method = 0;
+        while(true){
+            try{
+                method = Main.sc.nextInt();
+                if (method > 2 || method < 1){
+                    throw new Exception();
+                }
+                else{
+                    break;
+                }
+            }
+            catch(InputMismatchException e){
+                System.out.println("Menu tidak valid. Ulangi input.");
+                Main.sc.next();
+                continue;
+            }
+            catch(Exception e){
+                System.out.println("Menu tidak valid. Ulangi input.");
+                continue;
+            }
+        }
         if(method == 1){
             m = consoleInput();
         }
@@ -51,7 +71,27 @@ public class MatrixInput {
         System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
         System.out.println("2. Input dari file");
-        int method = Main.sc.nextInt();
+        int method = 0;
+        while(true){
+            try{
+                method = Main.sc.nextInt();
+                if (method > 2 || method < 1){
+                    throw new Exception();
+                }
+                else{
+                    break;
+                }
+            }
+            catch(InputMismatchException e){
+                System.out.println("Menu tidak valid. Ulangi input.");
+                Main.sc.next();
+                continue;
+            }
+            catch(Exception e){
+                System.out.println("Menu tidak valid. Ulangi input.");
+                continue;
+            }
+        }
         if(method == 1){
             m = consoleInput();
             int row = m.getRowLength();
@@ -100,8 +140,9 @@ public class MatrixInput {
             return m;
         }
         catch(FileNotFoundException e){
-            System.out.println("File tidak ditemukan. Mengembalikan matriks kosong.");
-            Matrix m = new Matrix();
+            System.out.println("File tidak ditemukan. Mengembalikan matriks 1x1 berisi elemen 1.");
+            Matrix m = new Matrix(1,1);
+            m.setElmt(1, 0, 0);
             return m;
         }        
     }
