@@ -50,7 +50,7 @@ public class MatrixInput {
                 for(int b=0; b<row; b++){
                     for(int c=0; c<col; c++){
 
-                        m.setElmt(Integer.parseInt(((JTextField)panel.getComponent(b*col + c)).getText()), b, c);
+                        m.setElmt(Double.parseDouble(((JTextField)panel.getComponent(b*col + c)).getText()), b, c);
                     }
                 }
             }
@@ -88,7 +88,7 @@ public class MatrixInput {
                     for(int b=0; b<row; b++){
                         for(int c=0; c<1; c++){
 
-                            ext.setElmt(Integer.parseInt(((JTextField)panel.getComponent(b + c)).getText()), b, c);
+                            ext.setElmt(Double.parseDouble(((JTextField)panel.getComponent(b + c)).getText()), b, c);
                         }
                     }
                 }

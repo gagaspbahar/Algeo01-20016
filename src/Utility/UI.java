@@ -152,7 +152,7 @@ public class UI {
         System.out.println(out);
         JOptionPane.showMessageDialog(null,"Hasil dari interpolasi adalah " + out);
         System.out.println("Masukkan input nilai fungsi yang ingin ditaksir: ");
-        double x = Integer.parseInt(JOptionPane.showInputDialog(null,"Masukkan input nilai fungsi yang ingin ditaksir :","Nilai Fungsi", JOptionPane.INFORMATION_MESSAGE));
+        double x = Double.parseDouble(JOptionPane.showInputDialog(null,"Masukkan input nilai fungsi yang ingin ditaksir :","Nilai Fungsi", JOptionPane.INFORMATION_MESSAGE));
         double guess = Interpolate.functionInterpolate(ans, x);
         System.out.println("Hasil nilai taksiran f(" + x + ") = " + guess);
         JOptionPane.showMessageDialog(null,"Hasil nilai taksiran f(" + x + ") = " + guess);
