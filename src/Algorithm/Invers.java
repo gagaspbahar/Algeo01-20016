@@ -1,5 +1,5 @@
 package Algorithm;
-
+import java.lang.Math;
 import Matrix.Matrix;
 
 
@@ -49,7 +49,6 @@ public class Invers {
         int i,j,n;
         double sign,det;
         
-        sign = 1;
         n = M.getRowLength();
         mRes = new Matrix(n,n);
         
@@ -67,13 +66,11 @@ public class Invers {
             mCofactor = new Matrix(n-1,n-1);
             for(i=0;i<n;i++){
                 for(j=0;j<n;j++){
-                mCofactor = mTemp.cofactor(i, j);
-                // mCofactor.displayMatrix();
-                mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j);
-                sign *= -1;
+                    sign = Math.pow(-1, i+j);
+                    mCofactor = mTemp.cofactor(i, j);
+                    mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j);
+                }
             }
-            sign *= -1;
-        }
         }
         
         mRes = mRes.transpose();
@@ -81,27 +78,6 @@ public class Invers {
         
         return mRes;
     }
-    
-    public static double[] inversSPL(Matrix M) {
-        Matrix Mres,Mtemp,Mb;
-        int row,col;
-        row = M.getRowLength();
-        col = M.getColLength();
-        Mtemp = new Matrix(row,col-1);
-        Mb = Operation.cutRight(M);
-        double[] res = new double[row];
-        for (int i = 0; i < row; i++){
-            for(int j = 0; j<col-1; j++){
-                Mtemp.setElmt(M.getElmt(i, j), i, j);
-            }
-        }
-        
-        Mres = Operation.multiplyMatrix(inversCofactor(Mtemp),Mb);
-        for (int i = 0; i < row; i++){
-            res[i] = Mres.getElmt(i, 0);
-        }
-    
-        return res;
-    }
+
 }
 

@@ -45,7 +45,8 @@ public class Regression {
 
         mReg.displayMatrix();
         //Selesaikan dengan GaussJordan
-        return GaussJordan.gaussJordanEquation(mReg);
+        SPL spl = new SPL(mReg);
+        return spl.gaussJordanEquation();
     }
 
     public static double functionRegression(double[] arrX, double[] inputX) {
