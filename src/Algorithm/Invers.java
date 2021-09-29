@@ -65,15 +65,16 @@ public class Invers {
             
             // Matriks Cofactor
             mCofactor = new Matrix(n-1,n-1);
-            for(i=0;i<n;i++){
-                for(j=0;j<n;j++){
+            for(i=0;i<n;i++)
+            {
+
+                for(j=0;j<n;j++)
+                {
                 mCofactor = mTemp.cofactor(i, j);
                 // mCofactor.displayMatrix();
                 mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j);
-                sign *= -1;
+                }
             }
-            sign *= -1;
-        }
         }
         
         mRes = mRes.transpose();
@@ -100,7 +101,7 @@ public class Invers {
         for (int i = 0; i < row; i++){
             res[i] = Mres.getElmt(i, 0);
         }
-    
+        inversCofactor(Mtemp).displayMatrix();
         return res;
     }
 }

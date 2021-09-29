@@ -1,7 +1,9 @@
 package Matrix;
 import java.util.Scanner;
-
+import javax.swing.*; 
 import Algorithm.Operation;
+import java.awt.*;
+
 
 import java.io.*;
 import Main.*;
@@ -14,7 +16,7 @@ public class MatrixInput {
         System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
         System.out.println("2. Input dari file");
-        int method = Main.sc.nextInt();
+        int method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));
         if(method == 1){
             m = consoleInput();
         }
@@ -29,15 +31,30 @@ public class MatrixInput {
     public static Matrix consoleInput(){
         // Scanner sc = new Scanner(System.in);
         System.out.println("Masukkan jumlah baris: ");
-        int row = Main.sc.nextInt();
+        int row = Integer.parseInt(JOptionPane.showInputDialog(null,"Masukkan jumlah baris :"));
         System.out.println("Masukkan jumlah kolom: ");
-        int col = Main.sc.nextInt();
+        int col = Integer.parseInt(JOptionPane.showInputDialog(null,"Masukkan jumlah kolom :"));
         System.out.println("Masukkan matrix: ");
         Matrix m = new Matrix(row, col);
-        for(int i = 0; i<m.getRowLength(); i++){
-            for(int j = 0; j<m.getColLength(); j++){
-                double x = Main.sc.nextDouble();
-                m.setElmt(x, i, j);
+        JOptionPane.showMessageDialog(null,"Masukkan matriks");
+        JPanel panel = new JPanel();     
+        panel.setLayout(new GridLayout(row,col));
+
+        for (int a=0; a<(row*col); a++)
+        {
+            panel.add(new JTextField(a));
+        }
+
+        if (JOptionPane.showConfirmDialog(null, panel, "Masukkan Matriks", JOptionPane.OK_CANCEL_OPTION)
+                                        == JOptionPane.OK_OPTION)
+        {
+            for(int a=0; a<(row*col); a++){
+                for(int b=0; b<row; b++){
+                    for(int c=0; c<col; c++){
+
+                        m.setElmt(Integer.parseInt(((JTextField)panel.getComponent(b*col + c)).getText()), b, c);
+                    }
+                }
             }
         }
         // sc.close();
@@ -51,15 +68,32 @@ public class MatrixInput {
         System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
         System.out.println("2. Input dari file");
-        int method = Main.sc.nextInt();
+        int method =  Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix:\n1. Input keyboard\n2. Input dari file"));
         if(method == 1){
             m = consoleInput();
             int row = m.getRowLength();
             Matrix ext = new Matrix(row, 1);
             System.out.println("Masukkan hasil dari persamaan SPL: ");
-            for(int i = 0; i < row; i++){
-                double x = Main.sc.nextDouble();
-                ext.setElmt(x, i, 0);
+            JOptionPane.showMessageDialog(null,"Masukkan hasil dari persamaan SPL");
+            JPanel panel = new JPanel();     
+            panel.setLayout(new GridLayout(row,1));
+
+            for (int a=0; a<(row*1); a++)
+            {
+                panel.add(new JTextField(a));
+            }
+
+            if (JOptionPane.showConfirmDialog(null, panel, "Enter the matrix", JOptionPane.OK_CANCEL_OPTION)
+                                            == JOptionPane.OK_OPTION)
+            {
+                for(int a=0; a<(row*1); a++){
+                    for(int b=0; b<row; b++){
+                        for(int c=0; c<1; c++){
+
+                            ext.setElmt(Integer.parseInt(((JTextField)panel.getComponent(b + c)).getText()), b, c);
+                        }
+                    }
+                }
             }
             m = Operation.extendMatrix(m, ext);
         }
@@ -74,7 +108,7 @@ public class MatrixInput {
         try{
             // Scanner sc = new Scanner(System.in);
             System.out.println("Masukkan nama file berisi matriks:");
-            String filename = Main.sc.next();
+            String filename = JOptionPane.showInputDialog(null,"Masukkan nama file berisi matriks :");
             String path = "test\\" + filename;
             File file = new File(path);
             // File file = new File("test\\mat.txt");
