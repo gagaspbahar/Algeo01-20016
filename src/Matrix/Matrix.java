@@ -95,7 +95,7 @@ public class Matrix {
         this.Contents[row][col] = x;
     }
     
-    public boolean isSquare(Matrix m){
+    public boolean isSquare(){
         return (this.Row == this.Col);
     }
 

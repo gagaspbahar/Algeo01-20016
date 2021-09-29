@@ -36,6 +36,8 @@ public class Menu {
                 break;
             case 6:
                 exit();
+            default :
+                
         }
     //    Main.sc.close();
     }
