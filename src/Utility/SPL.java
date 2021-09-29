@@ -3,9 +3,9 @@ import Algorithm.*;
 import Matrix.*;
 
 public class SPL {
-    public boolean noSolutions;
-    public boolean manySolutions;
-    public boolean singleSolution;
+    private boolean noSolutions;
+    private boolean manySolutions;
+    private boolean singleSolution;
     private double[] solution;
     private Matrix m;
 
@@ -26,6 +26,7 @@ public class SPL {
                 ans = GaussJordan.gaussJordanEquation(m);
                 break;
             case 3:
+                ans = Invers.inversSPL(m);
                 break;
             case 4:
                 ans = Cramer.cramerAlgo(m);
@@ -46,6 +47,7 @@ public class SPL {
                     out += "X" + (i+1) + " = " + this.solution[i] + "\n";
                 }
             }
+            
         }
         else if (noSolutions){
 
@@ -53,6 +55,7 @@ public class SPL {
         else if (manySolutions){
 
         }
+
         return out;
     }
 
@@ -73,4 +76,16 @@ public class SPL {
         this.noSolutions = false;
         this.singleSolution = true;
     }
+
+    public boolean manySolutions(){
+        return this.manySolutions;
+    }
+
+    public boolean noSolutions(){
+        return this.noSolutions;
+    }
+
+    public boolean singleSolution(){
+        return this.singleSolution;
+    }        
 }

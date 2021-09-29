@@ -50,6 +50,7 @@ public class Menu {
         int choice = Main.sc.nextInt();
         Matrix m;
         double[] ans = {0};
+        Output o;
         String out = "";
         m = MatrixInput.SPLInput();
         SPL spl = new SPL(m);
@@ -80,6 +81,8 @@ public class Menu {
         // }
         System.out.print(out);
         System.out.println();
+        o = new Output(out);
+        o.SPLtoFile();
         prompt();
     }
 
@@ -90,20 +93,21 @@ public class Menu {
         System.out.println();
         int choice = Main.sc.nextInt();
         Matrix m;
-        double det;
+        double det = 0;
         m = MatrixInput.Input();
         switch (choice){
             case 1:
                 det = m.determinantByOBE();
                 System.out.println("Determinan dari matriks adalah " + det);     
-                prompt();
                 break; 
             case 2:
                 det = m.determinantCofactor();
                 System.out.println("Determinan dari matriks adalah " + det);     
-                prompt();
                 break;
         }
+        Output o = new Output(det);
+        o.detToFile();
+        prompt();
     }
 
     // Inverse Menu
@@ -125,6 +129,8 @@ public class Menu {
         }
         System.out.println("Matriks balikan dari matriks input adalah: ");
         ans.displayMatrix();
+        Output o = new Output(ans);
+        o.inverseToFile();
         prompt();
     }
 
@@ -154,6 +160,8 @@ public class Menu {
         double x = Main.sc.nextDouble();
         double guess = Interpolate.functionInterpolate(ans, x);
         System.out.println("Hasil nilai taksiran f(" + x + ") = " + guess);
+        Output o = new Output(out, x, guess);
+        o.interpolateToFile();
         prompt();
     }
 
