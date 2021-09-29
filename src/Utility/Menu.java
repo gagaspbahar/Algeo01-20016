@@ -52,30 +52,32 @@ public class Menu {
         double[] ans = {0};
         String out = "";
         m = MatrixInput.SPLInput();
-        switch (choice){
-            case 1:
-                ans = Gauss.gaussEquation(m);
-                break;
-            case 2:
-                ans = GaussJordan.gaussJordanEquation(m);
-                break;
-            case 3:
-                ans = Invers.inversSPL(m);
-                break;
-            case 4:
-                ans = Cramer.cramerAlgo(m);
-                break;
+        SPL spl = new SPL(m);
+        ans = spl.solve(choice);
+        out = spl.consoleOut();
+        
+        // switch (choice){
+        //     case 1:
+        //         ans = Gauss.gaussEquation(m);
+        //         break;
+        //     case 2:
+        //         ans = GaussJordan.gaussJordanEquation(m);
+        //         break;
+        //     case 3:
+        //         break;
+        //     case 4:
+        //         ans = Cramer.cramerAlgo(m);
+        //         break;
                
-        }
-
-        for(int i = 0; i < ans.length; i++){
-            if (ans.length-1 == i){
-                out += "X" + (i+1) + " = " + ans[i]; 
-            }
-            else{
-                out += "X" + (i+1) + " = " + ans[i] + "\n";
-            }
-        }
+        // }
+        // for(int i = 0; i < ans.length; i++){
+        //     if (ans.length-1 == i){
+        //         out += "X" + (i+1) + " = " + ans[i];
+        //     }
+        //     else{
+        //         out += "X" + (i+1) + " = " + ans[i] + "\n";
+        //     }
+        // }
         System.out.print(out);
         System.out.println();
         prompt();
