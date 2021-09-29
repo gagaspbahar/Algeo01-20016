@@ -3,10 +3,8 @@ import java.util.Scanner;
 import javax.swing.*; 
 import Algorithm.Operation;
 import java.awt.*;
-
-
 import java.io.*;
-import Main.*;
+
 public class MatrixInput {
     
     // Input prompt

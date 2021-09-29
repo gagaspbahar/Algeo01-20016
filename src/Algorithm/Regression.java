@@ -42,10 +42,16 @@ public class Regression {
                 mReg.setElmt(temp, i, j);
             }
         }
+        mReg = Operation.OBETereduksi(mReg);
 
-        mReg.displayMatrix();
-        //Selesaikan dengan GaussJordan
-        return GaussJordan.gaussJordanEquation(mReg);
+        int a;
+        a = mReg.getColLength()-1;
+        double[] x = new double[a];
+        for (i=0; i<a; i++) {
+            x[i] = mReg.getElmt(i, a);
+        }
+
+        return x;
     }
 
     public static double functionRegression(double[] arrX, double[] inputX) {

@@ -49,7 +49,7 @@ public class Menu {
         System.out.println();
         int choice = Main.sc.nextInt();
         Matrix m;
-        double[] ans = {0};
+        String[] ans = {""};
         Output o;
         String out = "";
         m = MatrixInput.SPLInput();

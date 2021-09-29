@@ -2,13 +2,12 @@ package Utility;
 import javax.swing.*; 
 import Algorithm.*;
 import Matrix.*;
-import Main.*;
 import java.awt.*;
 
 public class UI {
 
     public static void mainMenu(){
-        int opt = Integer.parseInt(JOptionPane.showInputDialog(null, "Selamat datang di Matrix Calculator Mang DODZ. Silahkan pilih menu :\n1. Sistem Persamaan Linier\n2. Determinan\n3. Matriks balikan\n4. Interpolasi Polinom\n5. Regresi linier berganda\n 6. Keluar"));
+        int opt = Integer.parseInt(JOptionPane.showInputDialog(null, "Selamat datang di Matrix Calculator Mang DODZ. Silahkan pilih menu :\n1. Sistem Persamaan Linier\n2. Determinan\n3. Matriks balikan\n4. Interpolasi Polinom\n5. Regresi linier berganda\n 6. Keluar","Main Menu", JOptionPane.PLAIN_MESSAGE));
 
         switch (opt){
             case 1:
@@ -32,10 +31,10 @@ public class UI {
     }
 
     public static void SPLMenu(){
-        int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer"));
+        int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer","SPL subMenu", JOptionPane.INFORMATION_MESSAGE));
         Matrix m;
-        double[] ans = {0};
         Output o;
+        String[] ans = {""};
         String out = "";
         m = MatrixInput.SPLInput();
         SPL spl = new SPL(m);
@@ -75,7 +74,7 @@ public class UI {
 
     // Determinant Menu
     public static void determinantMenu(){
-        int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode reduksi baris (Gauss)\n2. Ekspansi kofaktor"));
+        int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode reduksi baris (Gauss)\n2. Ekspansi kofaktor","Determinant subMenu", JOptionPane.INFORMATION_MESSAGE));
         Matrix m;
         double det = 0;
         m = MatrixInput.Input();
@@ -83,12 +82,12 @@ public class UI {
             case 1:
                 det = m.determinantByOBE();
                 System.out.println("Determinan dari matriks adalah " + det);     
-                JOptionPane.showMessageDialog(null,"Determinan dari matriks adalah " + det);
+                JOptionPane.showMessageDialog(null,"Determinan dari matriks adalah " + det ,"Hasil", JOptionPane.INFORMATION_MESSAGE);
                 break; 
             case 2:
                 det = m.determinantCofactor();
                 System.out.println("Determinan dari matriks adalah " + det);   
-                JOptionPane.showMessageDialog(null,"Determinan dari matriks adalah " + det);  
+                JOptionPane.showMessageDialog(null,"Determinan dari matriks adalah " + det ,"Hasil", JOptionPane.INFORMATION_MESSAGE);   
                 break;
         }
         Output o = new Output(det);
@@ -98,7 +97,7 @@ public class UI {
 
     // Inverse Menu
     public static void inverseMenu(){
-        int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode matriks adjoin"));
+        int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode matriks adjoin","Inverse subMenu", JOptionPane.INFORMATION_MESSAGE));
         Matrix m;
         Matrix ans = new Matrix();
         m = MatrixInput.Input();
@@ -153,7 +152,7 @@ public class UI {
         System.out.println(out);
         JOptionPane.showMessageDialog(null,"Hasil dari interpolasi adalah " + out);
         System.out.println("Masukkan input nilai fungsi yang ingin ditaksir: ");
-        double x = Integer.parseInt(JOptionPane.showInputDialog(null,"Masukkan input nilai fungsi yang ingin ditaksir :"));
+        double x = Integer.parseInt(JOptionPane.showInputDialog(null,"Masukkan input nilai fungsi yang ingin ditaksir :","Nilai Fungsi", JOptionPane.INFORMATION_MESSAGE));
         double guess = Interpolate.functionInterpolate(ans, x);
         System.out.println("Hasil nilai taksiran f(" + x + ") = " + guess);
         JOptionPane.showMessageDialog(null,"Hasil nilai taksiran f(" + x + ") = " + guess);
@@ -188,7 +187,7 @@ public class UI {
     public static void prompt(){
         System.out.println("Ingin menggunakan kalkulator lagi? (y/n)");
 
-        String flag = JOptionPane.showInputDialog(null,"Ingin menggunakan kalkulator lagi? (y/n)");
+        String flag = JOptionPane.showInputDialog(null,"Ingin menggunakan kalkulator lagi? (y/n)", "prompt", JOptionPane.INFORMATION_MESSAGE);
         if(flag.equals("y") || flag.equals("Y")){
             mainMenu();
         }
