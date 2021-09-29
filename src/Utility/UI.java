@@ -3,8 +3,6 @@ import javax.swing.*;
 import Algorithm.*;
 import Matrix.*;
 import java.awt.*;
-import java.util.InputMismatchException;
-
 public class UI {
 
     public static void mainMenu(){
