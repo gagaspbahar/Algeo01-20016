@@ -43,10 +43,17 @@ public class Regression {
             }
         }
 
-        mReg.displayMatrix();
         //Selesaikan dengan GaussJordan
-        SPL spl = new SPL(mReg);
-        return spl.gaussJordanEquation();
+        mReg = Operation.OBETereduksi(mReg);
+
+        int a;
+        a = mReg.getColLength()-1;
+        double[] x = new double[a];
+        for (i=0; i<a; i++) {
+            x[i] = mReg.getElmt(i, a);
+        }
+
+        return x;
     }
 
     public static double functionRegression(double[] arrX, double[] inputX) {
