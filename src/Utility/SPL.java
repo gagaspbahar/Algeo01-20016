@@ -51,8 +51,26 @@ public class SPL {
 
         }
         else if (manySolutions){
-            
+
         }
         return out;
+    }
+
+    public void toNoSolutions(){
+        this.manySolutions = false;
+        this.noSolutions = true;
+        this.singleSolution = false;
+    }
+
+    public void toManySolutions(){
+        this.manySolutions = true;
+        this.noSolutions = false;
+        this.singleSolution = false;
+    }
+
+    public void toSingleSolution(){
+        this.manySolutions = false;
+        this.noSolutions = false;
+        this.singleSolution = true;
     }
 }
