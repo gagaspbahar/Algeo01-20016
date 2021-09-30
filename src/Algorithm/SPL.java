@@ -348,7 +348,7 @@ public class SPL {
         }
 
         // cek solusi
-        if (Mtemp.determinantCofactor() == 0 || row != col) {
+        if (Mtemp.determinantCofactor() == 0 || Mtemp.getRowLength() != Mtemp.getColLength()) {
             toNoSolutions();
         } else {
             toSingleSolution();

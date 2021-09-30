@@ -130,9 +130,9 @@ public class Operation {
         Matrix ans = new Matrix(row, col);
         for(int i = 0; i < row; i++){
             for(int j = 0; j < col; j++){
-                int temp = 0;
+                double temp = 0;
                 for(int k = 0; k < m1.getColLength(); k++){
-                    temp += m1.getElmt(i,k) * m2.getElmt(k,j);
+                    temp += (m1.getElmt(i,k) * m2.getElmt(k,j));
                 }
                 ans.setElmt(temp,i,j);
             }
