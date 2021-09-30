@@ -75,13 +75,13 @@ public class MatrixInput {
         int n = Integer.parseInt(JOptionPane.showInputDialog(null,"Masukkan n :"));
         Matrix M;
         M = new Matrix(n,2);
-        System.out.println("BABAI");;
+    
         int count = 0;
         for (int i = 0; i<n; i++){
                 JPanel panel = new JPanel();
-                System.out.println("BABAI");;
+               
                 panel.setLayout(new GridLayout(1,2));
-                System.out.println("BABAI");;
+              
                 for (int a=0; a<2; a++)
                 {
                     panel.add(new JTextField(3));
