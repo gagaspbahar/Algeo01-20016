@@ -64,11 +64,14 @@ public class Invers {
             
             // Matriks Cofactor
             mCofactor = new Matrix(n-1,n-1);
-            for(i=0;i<n;i++){
-                for(j=0;j<n;j++){
-                    sign = Math.pow(-1, i+j);
-                    mCofactor = mTemp.cofactor(i, j);
-                    mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j);
+
+            for(i=0;i<n;i++)
+            {
+                for(j=0;j<n;j++)
+                {
+                mCofactor = mTemp.cofactor(i, j);
+                // mCofactor.displayMatrix();
+                mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j);
                 }
             }
         }
@@ -78,6 +81,25 @@ public class Invers {
         
         return mRes;
     }
-
+    public static double[] inversSPL(Matrix M) {
+        Matrix Mres,Mtemp,Mb;
+        int row,col;
+        row = M.getRowLength();
+        col = M.getColLength();
+        Mtemp = new Matrix(row,col-1);
+        Mb = Operation.cutRight(M);
+        double[] res = new double[row];
+        for (int i = 0; i < row; i++){
+            for(int j = 0; j<col-1; j++){
+                Mtemp.setElmt(M.getElmt(i, j), i, j);
+            }
+        }
+        
+        Mres = Operation.multiplyMatrix(inversCofactor(Mtemp),Mb);
+        for (int i = 0; i < row; i++){
+            res[i] = Mres.getElmt(i, 0);
+        }
+        inversCofactor(Mtemp).displayMatrix();
+        return res;
+    }
 }
-

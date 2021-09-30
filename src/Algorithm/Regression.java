@@ -42,8 +42,6 @@ public class Regression {
                 mReg.setElmt(temp, i, j);
             }
         }
-
-        //Selesaikan dengan GaussJordan
         mReg = Operation.OBETereduksi(mReg);
 
         int a;
