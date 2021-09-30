@@ -307,15 +307,16 @@ public class SPL {
                 mTemp.setElmt(this.m.getElmt(i, j), i, j);; 
             }
         }
+        detX[0] = mTemp.determinantCofactor();
 
         //Check buat solusinya
         int row, col;
         row = this.m.getRowLength()-1;
         col = this.m.getColLength()-1;
-        if (detX[0] == 0 || row != col) {
+        if (detX[0] == 0 || row != col-1) {
             toNoSolutions();
         } else {
-            toSingleSolution();;
+            toSingleSolution();
         }
 
         if (this.singleSolution) {
