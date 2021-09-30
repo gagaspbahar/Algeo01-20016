@@ -3,7 +3,6 @@ import javax.swing.*;
 import Algorithm.*;
 import Matrix.*;
 import java.awt.*;
-import java.lang.Math;
 import java.util.Objects;
 
 public class UI {
@@ -347,9 +346,6 @@ public class UI {
             if (i==1){
                 out += ans[1] + "x";
             }
-            else if(i == len-1){
-                out += ans[i] + "x^" + i; 
-            }
             else{
                 out += ans[i] + "x^" + i;
             }
@@ -398,14 +394,25 @@ public class UI {
         ans = Regression.regressionAlgo(m);
 
         String out = "";
+        String plus = " + ";
+        String minus = " - ";
+        boolean isNegative = false;
         int len = m.getColLength();
-        out += ans[0] + " +";
+        out += ans[0];
         for (int i = 1; i < len; i++){
-            if(i == len-1){
-                out += " " + ans[i] + "*x" + i; 
+            isNegative = false;
+            if(ans[i] < 0){
+                out += minus;
+                ans[i] *= -1;
+                isNegative = true;
             }
             else{
-                out += " " + ans[i] + "*x" + i + " +";
+                out += plus;
+            }
+
+            out += ans[i] + "*x" + i;
+            if(isNegative){
+                ans[i] *= -1;
             }
         }
         double x = 0;
