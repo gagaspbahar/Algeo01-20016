@@ -1,6 +1,9 @@
 package Matrix;
 import java.util.Scanner;
-import javax.swing.*; 
+import javax.swing.*;
+
+import Utility.UI;
+
 import java.awt.*;
 import java.io.*;
 import java.util.Objects;
@@ -144,10 +147,12 @@ public class MatrixInput {
                 {
                     panel.add(new JTextField(3));
                 }
-                if (JOptionPane.showConfirmDialog(null, panel, "Masukkan X" + count +" Y" + count,JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION); 
+                if (JOptionPane.showConfirmDialog(null, panel, "Masukkan X" + count +" Y" + count,JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) 
                {
                     M.setElmt(Double.parseDouble(((JTextField)panel.getComponent(0)).getText()), i, 0);
                     M.setElmt(Double.parseDouble(((JTextField)panel.getComponent(1)).getText()), i, 1);
+               } else {
+                   exit();
                }
                count++;
 
@@ -199,6 +204,9 @@ public class MatrixInput {
                     }
                 }
             }
+        }else{
+
+            exit();
         }
         // sc.close();
         return m;
@@ -286,6 +294,8 @@ public class MatrixInput {
                         }
                     }
                 }
+            }else {
+                exit();
             }
             m = extendMatrix(m, ext);
         }
