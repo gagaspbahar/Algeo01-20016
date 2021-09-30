@@ -1,9 +1,6 @@
 package Algorithm;
 import Matrix.*;
 
-import javax.swing.*;
-
-
 public class SPL {
     private boolean noSolutions;
     private boolean manySolutions;
@@ -35,7 +32,7 @@ public class SPL {
                 break;
             default:
                 System.out.println("Pilihan tidak valid. Mengembalikan ke menu awal.");
-                JOptionPane.showMessageDialog(null,"Terjadi error. Input mungkin tidak valid. Mengulangi menu. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+
         }
         this.solution = ans;
         return ans;
@@ -117,48 +114,83 @@ public class SPL {
 
 
     public String[] parametric(Matrix M) {
-        String[] alphabet = {"a", "b", "c", "d", "e", "f", 
-        "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", 
-        "r", "s", "t", "u", "v", "w", "x", "y", "z"};
 
-        int i, j, k, row, col, count;
+        int i, j, row, col, count;
         double tempD;
-        row = M.getRowLength()-1;
+        row = M.getRowLength();
         col = M.getColLength()-1;
         count = (col - row);
 
-        // Bikin nilai parametriknya
-        String[] X = new String[col];
-        for (i=col-1; i>=count-1; i--) {
-            X[i] = alphabet[i];
+        this.m = Operation.OBETereduksi(this.m);
+
+        // Cari nilai variabel yang bukan parametrik dulu
+        int[][] tempIndex = new int[row][2];
+        double[] tempSolusi = new double[col];
+
+        for (i=0; i<col; i++) { // inisiasi nilai solusi sementara
+            tempSolusi[i] = 0; 
         }
 
-        //Backward substitution
-        String tempS, tempDtoS;
-        for (i = row-1; i>=0; i--){
-            tempS = "";
-            k = 0;
-            // cari elemen bukan 0 pertama
-            while (this.m.getElmt(i, k) == 0 && k <= col-1) {
-                k++;
-            }
-            System.out.println(k);
-
-            if (k <= col -1) {    
-                tempD = this.m.getElmt(i, k);
-            } else {
-                continue;
-            }
-
-            for (j= col-1; j>=0; j--){
-                if (this.m.getElmt(i, j) != 0){
-                        tempDtoS = Double.toString(-1*this.m.getElmt(i, j)/tempD);
-                        tempS += tempDtoS + "*" + X[j] + " ";
+        for (i=0; i<row; i++) {
+            for (j=0; j<col; j++) {
+                if (this.m.getElmt(i, j) == 1) {
+                    tempIndex[i][0] = i; // Indeks baris dari 1 utama 
+                    tempIndex[i][1] = j;
+                    break;
                 }
             }
-            X[i] = tempS;
+        }
+        
+        // Operasi yang buat non parametrik        
+        for (i=row-1; i>=0; i--){
+            tempD = this.m.getElmt(i, col);
+            for (j=tempIndex[i][1]; j<col; j++) {
+                tempD -= (tempSolusi[j]*this.m.getElmt(i, j));
+            }
+            tempSolusi[tempIndex[i][1]] = tempD;
+        }
+        
+        int countZero = 0;
+        for (i=0; i<col;i++) {
+            if (tempSolusi[i] == 0) {
+                countZero++;
+            }
         }
 
+        // Bikin nilai parametriknya
+        boolean allZero = (countZero == col);
+        String[] X = new String[col];
+        if (!allZero) {
+            for (i=0; i<col; i++) {
+                if (tempSolusi[i] == 0){
+                    X[i] = "x" + Integer.toString(i+1);
+                } else {
+                    X[i] = Double.toString(tempSolusi[i]) + " ";
+                    // X[i] = "";
+                }
+            }
+        } else {
+            for (i=col-1; i>=0; i--){
+                if (count > 0) {
+                    X[i] = "x" + Integer.toString(i+1);
+                    count--;
+                } else {
+                    X[i] = "";
+                }
+            }
+        }
+
+        String tempS;
+        for (i=0; i<row; i++){
+            tempS = X[tempIndex[i][1]];
+            for (j=tempIndex[i][1]; j<col; j++){
+                if (tempSolusi[j] == 0 && this.m.getElmt(i, j) != 0 && tempIndex[i][1] != j){
+                    tempS += "-" + Double.toString(this.m.getElmt(i, j)) + "*" + X[j] + " ";
+                }
+
+            }
+            X[tempIndex[i][1]] = tempS;
+        }
         return X;
     }
     
