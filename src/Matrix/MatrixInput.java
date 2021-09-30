@@ -72,6 +72,67 @@ public class MatrixInput {
     }
 
     public static Matrix interpolateInput(){
+        Matrix m = new Matrix();
+        System.out.println("Pilih cara input matrix:");
+        System.out.println("1. Input keyboard");
+        System.out.println("2. Input dari file");
+
+        int method = 0;
+        String temps;
+        while(true){
+            try{
+                temps = JOptionPane.showInputDialog(null,"Pilih cara input interpolasi :\n1. Input keyboard\n2. Input dari file");
+                if (Objects.isNull(temps)){
+                    throw new Exception();
+                }
+                else{
+                    method = Integer.parseInt(temps);
+                    if (method > 2 || method < 1){
+                        throw new NumberFormatException();
+                    }
+                    break;
+                }
+            }
+            catch(NumberFormatException e){
+                System.out.println("Menu tidak valid. Ulangi input.");
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
+                continue;
+            }
+            catch(Exception e){
+                UI.exit();
+            }
+        }
+
+        // while(true){
+        //     try{
+        //         method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));
+        //         if (method > 2 || method < 1){
+        //             throw new Exception();
+        //         }
+        //         else{
+        //             break;
+        //         }
+        //     }
+        //     catch(Exception e){
+        //         System.out.println("Menu tidak valid. Ulangi input.");
+        //         JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+
+        //         continue;
+        //     }
+        // }
+        if(method == 1){
+            m = interpolateInt();
+        }
+        else if(method == 2){
+            m = fileInput();
+        }
+        
+
+        return m;
+    }
+
+    public static Matrix interpolateInt(){
         int n = Integer.parseInt(JOptionPane.showInputDialog(null,"Masukkan n :"));
         Matrix M;
         M = new Matrix(n,2);
@@ -94,7 +155,6 @@ public class MatrixInput {
                count++;
 
         }
-
         return M;
     }
 
