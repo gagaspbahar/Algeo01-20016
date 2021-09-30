@@ -51,12 +51,6 @@ public class Output {
         this.regressionGuess = guess;
     }
 
-     // Regression outputs
-    public Output(String s, double x, double[] guess){
-        this.function = s;
-        this.regressionRes = x;
-        this.regressionGuess = guess;
-    }
     
 
 
@@ -172,34 +166,6 @@ public class Output {
         catch(IOException e){
             System.out.println("Terjadi error.");
             JOptionPane.showMessageDialog(null,"Terjadi error. " ,"Error!", JOptionPane.ERROR_MESSAGE); 
-        }
-    }
-
-
-    public void regressionToFile(){
-        try{
-            createFile();
-            Date date = new Date();
-            FileWriter wr = new FileWriter(this.path);
-            wr.write("REGRESSION RESULT " + formatter.format(date) + "\n");
-            wr.write("REGRESSION FUNCTION: " + this.function + "\n");
-            String s = "";
-            for(int i = 1; i < this.regressionGuess.length; i++){
-                if(i == this.regressionGuess.length-1){
-                    s += "X" + i + " = " + this.regressionGuess[i];
-                }
-                else{
-                    s += "X" + i + " = " + this.regressionGuess[i] + "\n";
-                }
-            }
-            wr.write("REGRESSION RESULTS WITH PARAMETERS:\n");
-            wr.write(s + "\n");
-            wr.write(this.regressionRes + "\n");
-            wr.close();
-            System.out.println("Sukses menulis file.");
-        }
-        catch(IOException e){
-            System.out.println("Terjadi error.");
         }
     }
 
