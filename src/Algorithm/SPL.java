@@ -119,7 +119,7 @@ public class SPL {
         double tempD;
         row = M.getRowLength();
         col = M.getColLength()-1;
-        count = (col - row);
+        count = (col - row) + this.m.countRowZero();
 
         this.m = Operation.OBETereduksi(this.m);
 
@@ -157,22 +157,30 @@ public class SPL {
             }
         }
 
+        // Test
+        for (i=0; i<col; i++) {
+            System.out.println(tempSolusi[i]);
+        }
+
         // Bikin nilai parametriknya
         boolean allZero = (countZero == col);
         String[] X = new String[col];
         if (!allZero) {
-            for (i=0; i<col; i++) {
-                if (tempSolusi[i] == 0){
+            for (i=col-1; i>=0; i--) {
+                if (tempSolusi[i] == 0 && count > 0){
                     X[i] = "x" + Integer.toString(i+1);
+                    count--;
+                } else if (tempSolusi[i] == 0 && count <= 0) {
+                    X[i] = "";
                 } else {
                     X[i] = Double.toString(tempSolusi[i]) + " ";
-                    // X[i] = "";
                 }
             }
         } else {
             for (i=col-1; i>=0; i--){
                 if (count > 0) {
                     X[i] = "x" + Integer.toString(i+1);
+                    System.out.println(X[i]);
                     count--;
                 } else {
                     X[i] = "";
@@ -185,9 +193,16 @@ public class SPL {
             tempS = X[tempIndex[i][1]];
             for (j=tempIndex[i][1]; j<col; j++){
                 if (tempSolusi[j] == 0 && this.m.getElmt(i, j) != 0 && tempIndex[i][1] != j){
-                    tempS += "-" + Double.toString(this.m.getElmt(i, j)) + "*" + X[j] + " ";
+                    if (this.m.getElmt(i, j) == 1){
+                        tempS += " -" + X[j] + " ";
+                    }else if (this.m.getElmt(i, j) == -1) {
+                        tempS += " +" + X[j] + " ";
+                    } else if (this.m.getElmt(i, j) > 0) {
+                        tempS += " -" + Double.toString(this.m.getElmt(i, j)) + "*" + X[j] + " ";
+                    } else {
+                        tempS += " +" + Double.toString(-1*this.m.getElmt(i, j)) + "*" + X[j] + " ";
+                    }
                 }
-
             }
             X[tempIndex[i][1]] = tempS;
         }

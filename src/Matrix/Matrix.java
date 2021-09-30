@@ -218,4 +218,23 @@ public class Matrix {
         }   
         return mTemp;
     }
+
+    // Check if element in row are all zero
+    public int countRowZero(){
+        int i, j, countRow, countZero;
+        countRow = 0;
+        countZero = 0;
+        for (i = 0; i<this.Row; i++){
+            countZero = 0;
+            for (j = 0; j<this.Col; j++){
+                if (this.getElmt(i, j) == 0) {
+                    countZero++;
+                }
+            }
+            if (countZero == this.Col){
+                countRow++;
+            }
+        }
+        return countRow;
+    }
 }
