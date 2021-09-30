@@ -318,7 +318,7 @@ public class UI {
         Matrix m = new Matrix();
         double[] ans = {0};
         try{
-            m = MatrixInput.Input();
+            m = MatrixInput.interpolateInput();
         }
         catch(Exception e){
             System.out.println("Terjadi eror. Input mungkin tidak valid. Mengulangi menu.");

@@ -71,6 +71,33 @@ public class MatrixInput {
         return m;
     }
 
+    public static Matrix interpolateInput(){
+        int n = Integer.parseInt(JOptionPane.showInputDialog(null,"Masukkan n :"));
+        Matrix M;
+        M = new Matrix(n,2);
+        System.out.println("BABAI");;
+        int count = 0;
+        for (int i = 0; i<n; i++){
+                JPanel panel = new JPanel();
+                System.out.println("BABAI");;
+                panel.setLayout(new GridLayout(1,2));
+                System.out.println("BABAI");;
+                for (int a=0; a<2; a++)
+                {
+                    panel.add(new JTextField(3));
+                }
+                if (JOptionPane.showConfirmDialog(null, panel, "Masukkan X" + count +" Y" + count,JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION); 
+               {
+                    M.setElmt(Double.parseDouble(((JTextField)panel.getComponent(0)).getText()), i, 0);
+                    M.setElmt(Double.parseDouble(((JTextField)panel.getComponent(1)).getText()), i, 1);
+               }
+               count++;
+
+        }
+
+        return M;
+    }
+
     // Input from console
     public static Matrix consoleInput(){
         // Scanner sc = new Scanner(System.in);
