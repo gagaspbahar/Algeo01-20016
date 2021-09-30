@@ -307,11 +307,10 @@ public class SPL {
         // Matrix n x n untuk mencari determinan
         n = this.m.getRowLength(); 
         mTemp = new Matrix(n,n);
-        mTemp = Operation.cutRight(this.m);
         double[] x = new double[n];
         double[] detX = new double[n+1];
 
-        if (!mTemp.isSquare()){
+        if (n > this.m.getColLength() - 1){
             String[] s = {"Tidak bisa menggunakan metode cramer"};
             toNoSolutions();
             return s;
