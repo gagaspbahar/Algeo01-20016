@@ -305,13 +305,22 @@ public class MatrixInput {
     // Input Matrix from file
     public static Matrix fileInput(){
         try{
+            String path;
             // Scanner sc = new Scanner(System.in);
             System.out.println("Masukkan nama file berisi matriks:");
             String filename = JOptionPane.showInputDialog(null,"Masukkan nama file berisi matriks :");
             if(Objects.isNull(filename)){
                 throw new Exception();
             }
-            String path = "test\\" + filename;
+            String directory = System.getProperty("user.dir");
+            directory = directory.substring(directory.lastIndexOf("\\")+1);
+            if(directory.equals("bin")){
+                path = "..\\test\\" + filename;
+            }
+            else{
+                path = "test\\" + filename;
+            }
+            System.out.println(path);
             File file = new File(path);
             // File file = new File("test\\mat.txt");
             // System.out.println(file.getAbsolutePath());

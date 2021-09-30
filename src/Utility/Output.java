@@ -15,6 +15,9 @@ public class Output {
     private double interpolateGuess;
     private double regressionRes;
     private double[] regressionGuess; 
+
+
+    
     private String dir = "test\\result\\";
     private String path = "";
     private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH.mm.ss");
@@ -24,8 +27,8 @@ public class Output {
     //     o.detToFile();
     // }
 
-
-
+    
+    
     // double outputs
     public Output(double n){
         this.det = n;
@@ -56,6 +59,7 @@ public class Output {
 
     public void createFile(){
         try{
+            pathMaker();
             Date date = new Date();
             File file = new File(dir + formatter.format(date) + ".txt");
             if (!file.exists()){
@@ -186,4 +190,15 @@ public class Output {
         return s;
     }
 
+
+    public void pathMaker(){
+        String directory = System.getProperty("user.dir");
+        directory = directory.substring(directory.lastIndexOf("\\")+1);
+        if(directory.equals("bin")){
+            dir = "..\\test\\result\\";
+        }
+        else{
+            dir = "test\\result\\";
+        }
+    }
 }
