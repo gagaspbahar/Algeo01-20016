@@ -24,7 +24,6 @@ public class Interpolate {
         // Lakukan operasi OBETereduksi
         mTemp = Operation.OBETereduksi(mTemp);
 
-        // Karena gaada ADT Array, pake matrix dengan rows = 1
         double[] ans;
         ans = new double[n];
         for (i=0; i<n; i++) {

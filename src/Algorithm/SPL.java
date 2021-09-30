@@ -1,7 +1,9 @@
 package Algorithm;
 import Matrix.*;
 import Utility.*;
+
 import javax.swing.*;
+
 
 public class SPL {
     private boolean noSolutions;

@@ -1,6 +1,7 @@
 package Matrix;
 import java.util.Scanner;
 import javax.swing.*; 
+import java.util.InputMismatchException;
 import Algorithm.Operation;
 import java.awt.*;
 import java.io.*;
@@ -17,7 +18,9 @@ public class MatrixInput {
         int method = 0;
         while(true){
             try{
-                method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));;
+
+                method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));
+
                 if (method > 2 || method < 1){
                     throw new Exception();
                 }
@@ -28,6 +31,7 @@ public class MatrixInput {
             catch(Exception e){
                 System.out.println("Menu tidak valid. Ulangi input.");
                 JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+
                 continue;
             }
         }
@@ -86,7 +90,9 @@ public class MatrixInput {
         int method = 0;
         while(true){
             try{
+
                 method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix:\n1. Input keyboard\n2. Input dari file"));;
+
                 if (method > 2 || method < 1){
                     throw new Exception();
                 }
@@ -94,9 +100,11 @@ public class MatrixInput {
                     break;
                 }
             }
+
             catch(Exception e){
                 System.out.println("Menu tidak valid. Ulangi input.");
                 JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+
                 continue;
             }
         }
@@ -167,6 +175,7 @@ public class MatrixInput {
         catch(FileNotFoundException e){
             System.out.println("File tidak ditemukan. Mengembalikan matriks 1x1 berisi elemen 1.");
             JOptionPane.showMessageDialog(null,"File tidak ditemukan. Mengembalikan matriks 1x1 berisi elemen 1. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+
             Matrix m = new Matrix(1,1);
             m.setElmt(1, 0, 0);
             return m;
