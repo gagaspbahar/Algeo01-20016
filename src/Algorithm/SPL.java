@@ -206,6 +206,15 @@ public class SPL {
             }
             X[tempIndex[i][1]] = tempS;
         }
+
+        // Kalau sampe akhir ada variabel yang isinya "" berarti nilainya 0
+        for (i=0; i<X.length; i++){
+            if (X[i] == "") {
+                X[i] = "0.0";
+            }
+        }
+
+        // Cek kalau ada X yang isinya 
         return X;
     }
     
@@ -298,8 +307,15 @@ public class SPL {
         // Matrix n x n untuk mencari determinan
         n = this.m.getRowLength(); 
         mTemp = new Matrix(n,n);
+        mTemp = Operation.cutRight(this.m);
         double[] x = new double[n];
         double[] detX = new double[n+1];
+
+        if (!mTemp.isSquare()){
+            String[] s = {"Tidak bisa menggunakan metode cramer"};
+            toNoSolutions();
+            return s;
+        }
 
         // Isi Matrix temp dengan n x n SPL
         for (i=0; i<n; i++) {
@@ -364,7 +380,7 @@ public class SPL {
         }
 
         // cek solusi
-        if (Mtemp.determinantCofactor() == 0 || Mtemp.getRowLength() != Mtemp.getColLength()) {
+        if (!this.m.isSquare() || Mtemp.determinantCofactor() == 0 || Mtemp.getRowLength() != Mtemp.getColLength()) {
             toNoSolutions();
         } else {
             toSingleSolution();
