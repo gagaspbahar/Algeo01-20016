@@ -64,14 +64,11 @@ public class Invers {
             
             // Matriks Cofactor
             mCofactor = new Matrix(n-1,n-1);
-
-            for(i=0;i<n;i++)
-            {
-                for(j=0;j<n;j++)
-                {
-                mCofactor = mTemp.cofactor(i, j);
-                // mCofactor.displayMatrix();
-                mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j);
+            for(i=0;i<n;i++){
+                for(j=0;j<n;j++){
+                    sign = Math.pow(-1, i+j);
+                    mCofactor = mTemp.cofactor(i, j);
+                    mRes.setElmt(mCofactor.determinantCofactor()*sign, i, j);
                 }
             }
         }
