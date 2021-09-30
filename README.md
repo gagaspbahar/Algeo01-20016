@@ -28,7 +28,6 @@ Contributors:
 
 
 ## Features
-List the ready features here:
 - Solving linear systems of equations using Gauss, Gauss-Jordan, Inverse, and Cramer methods
 - Solving determinants using Cofactor and Inverse matrix methods
 - Making inverse matrices using Gauss elimination and Adjoint matrix methods
@@ -115,12 +114,13 @@ List the ready features here:
 3. Go to bin folder
 4. Run the Main.Main program using the command : `java Main.Main`
 
+- note: if UnsupportedClassVersionError, recompile the code using step 2. this means your java version doesnt support.
 
 
 ## Acknowledgements
 
 - Thanks to Allah SWT
-- Thanks to Mr. Rinaldi Munir as our Lecturers
+- Thanks to Mr. Rinaldi Munir, Mr. Jodhi, and Mr. Rila as our Lecturers
 - Thanks to academic assistants
 - This project was created to fulfill our Big Project for IF2123 Linear and Geometric Algebra
 
