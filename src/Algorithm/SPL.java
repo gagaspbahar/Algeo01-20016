@@ -379,7 +379,7 @@ public class SPL {
         }
 
         // cek solusi
-        if (!this.m.isSquare() || Mtemp.determinantCofactor() == 0 || Mtemp.getRowLength() != Mtemp.getColLength()) {
+        if (!Mtemp.isSquare() || Mtemp.determinantCofactor() == 0 || Mtemp.getRowLength() != Mtemp.getColLength()) {
             toNoSolutions();
         } else {
             toSingleSolution();
