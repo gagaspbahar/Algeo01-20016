@@ -4,6 +4,8 @@ import javax.swing.*;
 import Algorithm.Operation;
 import java.awt.*;
 import java.io.*;
+import Utility.*;
+import java.util.Objects;
 
 public class MatrixInput {
     
@@ -14,26 +16,51 @@ public class MatrixInput {
         System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
         System.out.println("2. Input dari file");
+
         int method = 0;
+        String temps;
         while(true){
             try{
-
-                method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));
-
-                if (method > 2 || method < 1){
+                temps = JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file");
+                if (Objects.isNull(temps)){
                     throw new Exception();
                 }
                 else{
+                    method = Integer.parseInt(temps);
+                    if (method > 2 || method < 1){
+                        throw new NumberFormatException();
+                    }
                     break;
                 }
             }
-            catch(Exception e){
+            catch(NumberFormatException e){
                 System.out.println("Menu tidak valid. Ulangi input.");
-                JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
                 continue;
             }
+            catch(Exception e){
+                UI.exit();
+            }
         }
+
+        // while(true){
+        //     try{
+        //         method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));
+        //         if (method > 2 || method < 1){
+        //             throw new Exception();
+        //         }
+        //         else{
+        //             break;
+        //         }
+        //     }
+        //     catch(Exception e){
+        //         System.out.println("Menu tidak valid. Ulangi input.");
+        //         JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+
+        //         continue;
+        //     }
+        // }
         if(method == 1){
             m = consoleInput();
         }
@@ -69,8 +96,26 @@ public class MatrixInput {
             for(int a=0; a<(row*col); a++){
                 for(int b=0; b<row; b++){
                     for(int c=0; c<col; c++){
-
-                        m.setElmt(Double.parseDouble(((JTextField)panel.getComponent(b*col + c)).getText()), b, c);
+                        try{
+                            Component tempc = panel.getComponent(b*col + c);
+                            
+                            if(Objects.isNull(tempc)){
+                                throw new NullPointerException();
+                            }
+                            else{
+                                m.setElmt(Double.parseDouble(((JTextField)tempc).getText()), b, c);
+                                break;
+                            }
+                        }
+                        catch(NumberFormatException e){
+                            System.out.println("Menu tidak valid. Ulangi input.");
+                            System.out.println(e);
+                            JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
+                            continue;
+                        }
+                        catch(NullPointerException e){
+                            UI.exit();
+                        }
                     }
                 }
             }
@@ -86,27 +131,57 @@ public class MatrixInput {
         System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
         System.out.println("2. Input dari file");
+        
         int method = 0;
+        String temps;
         while(true){
             try{
-
-                method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix:\n1. Input keyboard\n2. Input dari file"));;
-
-                if (method > 2 || method < 1){
+                temps = JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file");
+                if (Objects.isNull(temps)){
                     throw new Exception();
                 }
                 else{
+                    method = Integer.parseInt(temps);
+                    if (method > 2 || method < 1){
+                        throw new NumberFormatException();
+                    }
                     break;
                 }
             }
-
-            catch(Exception e){
+            catch(NumberFormatException e){
                 System.out.println("Menu tidak valid. Ulangi input.");
-                JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
                 continue;
             }
+            catch(Exception e){
+                UI.exit();
+            }
         }
+
+
+        // while(true){
+        //     try{
+
+        //         method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix:\n1. Input keyboard\n2. Input dari file"));;
+
+        //         if (method > 2 || method < 1){
+        //             throw new Exception();
+        //         }
+        //         else{
+        //             break;
+        //         }
+        //     }
+
+        //     catch(Exception e){
+        //         System.out.println("Menu tidak valid. Ulangi input.");
+        //         JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+
+        //         continue;
+        //     }
+        // }
+
+
         if(method == 1){
             m = consoleInput();
             int row = m.getRowLength();
@@ -147,6 +222,9 @@ public class MatrixInput {
             // Scanner sc = new Scanner(System.in);
             System.out.println("Masukkan nama file berisi matriks:");
             String filename = JOptionPane.showInputDialog(null,"Masukkan nama file berisi matriks :");
+            if(Objects.isNull(filename)){
+                throw new Exception();
+            }
             String path = "test\\" + filename;
             File file = new File(path);
             // File file = new File("test\\mat.txt");
@@ -174,10 +252,17 @@ public class MatrixInput {
         catch(FileNotFoundException e){
             System.out.println("File tidak ditemukan. Mengembalikan matriks 1x1 berisi elemen 1.");
             JOptionPane.showMessageDialog(null,"File tidak ditemukan. Mengembalikan matriks 1x1 berisi elemen 1. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-
+            System.out.println(e);
             Matrix m = new Matrix(1,1);
             m.setElmt(1, 0, 0);
             return m;
-        }        
+        }
+        catch(Exception e){
+            System.out.println(e);
+            UI.exit();
+            Matrix m = new Matrix(1,1);
+            m.setElmt(1, 0, 0);
+            return m;
+        }      
     }
 }

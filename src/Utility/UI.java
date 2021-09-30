@@ -3,23 +3,36 @@ import javax.swing.*;
 import Algorithm.*;
 import Matrix.*;
 import java.awt.*;
+import java.lang.Math;
+import java.util.Objects;
 
 public class UI {
 
     public static void mainMenu(){
-
+        String temps;
         int opt = 0;
         
         while(true){
             try{
-                opt = Integer.parseInt(JOptionPane.showInputDialog(null, "Selamat datang di Matrix Calculator Mang DODZ. Silahkan pilih menu :\n1. Sistem Persamaan Linier\n2. Determinan\n3. Matriks balikan\n4. Interpolasi Polinom\n5. Regresi linier berganda\n 6. Keluar","Main Menu", JOptionPane.PLAIN_MESSAGE));
-                break;
+                temps = JOptionPane.showInputDialog(null, "Selamat datang di Matrix Calculator Mang DODZ. Silahkan pilih menu :\n1. Sistem Persamaan Linier\n2. Determinan\n3. Matriks balikan\n4. Interpolasi Polinom\n5. Regresi linier berganda\n 6. Keluar","Main Menu", JOptionPane.PLAIN_MESSAGE);
+                if (Objects.isNull(temps)){
+                    throw new Exception();
+                }
+                else{
+                    opt = Integer.parseInt(temps);
+                    break;
+                }
             }
-            catch(Exception e){
+
+            catch(NumberFormatException e){
                 System.out.println("Menu tidak valid. Ulangi input.");
+                System.out.println(e);
                 JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
                 mainMenu();
                 continue;
+            }
+            catch(Exception e){
+                exit();
             }
         }
         switch (opt){
@@ -47,27 +60,51 @@ public class UI {
     }
 
     public static void SPLMenu(){
-        
         int choice = 0;
+        String temps;
         while(true){
             try{
-                choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer","SPL subMenu", JOptionPane.INFORMATION_MESSAGE));
-                if(choice == 0){
-                    exit();
-                }
-                else if (choice > 4 || choice < 1){
+                temps = JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer","SPL subMenu", JOptionPane.INFORMATION_MESSAGE);
+                if (Objects.isNull(temps)){
                     throw new Exception();
                 }
                 else{
+                    choice = Integer.parseInt(temps);
+                    if (choice > 4 || choice < 1){
+                        throw new NumberFormatException();
+                    }
                     break;
                 }
             }
-           
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+            catch(NumberFormatException e){
+                System.out.println("Menu tidak valid. Ulangi input.");
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
                 continue;
             }
+            catch(Exception e){
+                exit();
+            }
         }
+
+
+            // try{
+            //     choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer","SPL subMenu", JOptionPane.INFORMATION_MESSAGE));
+            //     if(choice == 0){
+            //         exit();
+            //     }
+            //     else if (choice > 4 || choice < 1){
+            //         throw new Exception();
+            //     }
+            //     else{
+            //         break;
+            //     }
+            // }
+           
+            // catch(Exception e){
+            //     JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+            //     continue;
+            // }
         Matrix m = new Matrix();
         Output o;
         String[] ans = {""};
@@ -84,30 +121,6 @@ public class UI {
         SPL spl = new SPL(m);
         ans = spl.solve(choice);
         out = spl.consoleOut();
-        
-        // switch (choice){
-        //     case 1:
-        //         ans = Gauss.gaussEquation(m);
-        //         break;
-        //     case 2:
-        //         ans = GaussJordan.gaussJordanEquation(m);
-        //         break;
-        //     case 3:
-        //         ans = inversSPL(m);
-        //         break;
-        //     case 4:
-        //         ans = Cramer.cramerAlgo(m);
-        //         break;
-               
-        // }
-        // for(int i = 0; i < ans.length; i++){
-        //     if (ans.length-1 == i){
-        //         out += "X" + (i+1) + " = " + ans[i];
-        //     }
-        //     else{
-        //         out += "X" + (i+1) + " = " + ans[i] + "\n";
-        //     }
-        // }
         System.out.print(out);
         JOptionPane.showMessageDialog(null,out,"Hasil SPL adalah", JOptionPane.INFORMATION_MESSAGE);
         System.out.println();
@@ -119,22 +132,51 @@ public class UI {
     // Determinant Menu
     public static void determinantMenu(){
         int choice = 0;
+        String temps;
         while(true){
             try{
-                choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode reduksi baris (Gauss)\n2. Ekspansi kofaktor","Determinant subMenu", JOptionPane.INFORMATION_MESSAGE));
-                if (choice > 2 || choice < 1){
+                temps = JOptionPane.showInputDialog(null,"1. Metode reduksi baris (Gauss)\n2. Ekspansi kofaktor","Determinant subMenu", JOptionPane.INFORMATION_MESSAGE);
+                if (Objects.isNull(temps)){
                     throw new Exception();
                 }
                 else{
+                    choice = Integer.parseInt(temps);
+                    if (choice > 2 || choice < 1){
+                        throw new NumberFormatException();
+                    }
                     break;
                 }
             }
-            catch(Exception e){
+            catch(NumberFormatException e){
                 System.out.println("Menu tidak valid. Ulangi input.");
-                JOptionPane.showMessageDialog(null,"Terjadi error. Input mungkin tidak valid. Mengulangi menu. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
                 continue;
             }
+            catch(Exception e){
+                exit();
+            }
         }
+
+
+        // while(true){
+        //     try{
+        //         choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode reduksi baris (Gauss)\n2. Ekspansi kofaktor","Determinant subMenu", JOptionPane.INFORMATION_MESSAGE));
+        //         if (choice > 2 || choice < 1){
+        //             throw new Exception();
+        //         }
+        //         else{
+        //             break;
+        //         }
+        //     }
+        //     catch(Exception e){
+        //         System.out.println("Menu tidak valid. Ulangi input.");
+        //         JOptionPane.showMessageDialog(null,"Terjadi error. Input mungkin tidak valid. Mengulangi menu. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+        //         continue;
+        //     }
+        // }
+
+
         Matrix m = new Matrix();
         double det = 0;
         try{
@@ -144,9 +186,8 @@ public class UI {
             JOptionPane.showMessageDialog(null,"Terjadi error. Input mungkin tidak valid. Mengulangi menu. " ,"Error!", JOptionPane.ERROR_MESSAGE);
             determinantMenu();
         }
-
         if (!m.isSquare()){
-            choice = 3;
+            choice = -1;
         }
         switch (choice){
             case 1:
@@ -159,7 +200,7 @@ public class UI {
                 System.out.println("Determinan dari matriks adalah " + det);   
                 JOptionPane.showMessageDialog(null,"Determinan dari matriks adalah " + det ,"Hasil", JOptionPane.INFORMATION_MESSAGE);   
                 break;
-            case 3:
+            case -1:
                 System.out.println("Matriks input bukan matriks persegi. Mengembalikan ke menu utama. \n");
                 JOptionPane.showMessageDialog(null,"Matriks input bukan matriks persegi. Mengembalikan ke menu utama. " ,"Error!", JOptionPane.ERROR_MESSAGE);
                 prompt();
@@ -172,27 +213,58 @@ public class UI {
         Output o = new Output(det);
         o.detToFile();
         prompt();
+
     }
 
     // Inverse Menu
     public static void inverseMenu(){
         int choice = 0;
+        String temps;
         while(true){
             try{
-                choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode matriks adjoin","Inverse subMenu", JOptionPane.INFORMATION_MESSAGE));
-                if (choice > 2 || choice < 1){
+                temps = JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode matriks adjoin","Inverse subMenu", JOptionPane.INFORMATION_MESSAGE);
+                if (Objects.isNull(temps)){
                     throw new Exception();
                 }
                 else{
+                    choice = Integer.parseInt(temps);
+                    if (choice > 2 || choice < 1){
+                        throw new NumberFormatException();
+                    }
                     break;
                 }
             }
-            catch(Exception e){
+            catch(NumberFormatException e){
                 System.out.println("Menu tidak valid. Ulangi input.");
-                JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
                 continue;
             }
+            catch(Exception e){
+                exit();
+            }
         }
+        
+        
+        
+        // while(true){
+        //     try{
+        //         choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode matriks adjoin","Inverse subMenu", JOptionPane.INFORMATION_MESSAGE));
+        //         if (choice > 2 || choice < 1){
+        //             throw new Exception();
+        //         }
+        //         else{
+        //             break;
+        //         }
+        //     }
+        //     catch(Exception e){
+        //         System.out.println("Menu tidak valid. Ulangi input.");
+        //         JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
+        //         continue;
+        //     }
+        // }
+
+
         Matrix m = new Matrix();
         Matrix ans = new Matrix();
         try{
@@ -252,23 +324,37 @@ public class UI {
         catch(Exception e){
             System.out.println("Terjadi eror. Input mungkin tidak valid. Mengulangi menu.");
             JOptionPane.showMessageDialog(null,"Terjadi error. Input mungkin tidak valid. Mengulangi menu. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-
             interpolateMenu();
         }
         ans = Interpolate.interpolateAlg(m);
         System.out.println("Hasil dari interpolasi adalah: ");
         String out = "";
+        String plus = " + ";
+        String minus = " - ";
+        boolean isNegative = false;
         int len = m.getRowLength();
-        out += ans[0] + " +";
+        out += ans[0];
         for (int i = 1; i < len; i++){
-            if (i==1){
-                out += " " + ans[1] + "x +";
-            }
-            else if(i == len-1){
-                out += " " + ans[i] + "x^" + i; 
+            isNegative = false;
+            if (ans[i] < 0){
+                out += minus;
+                ans[i] *= -1;
+                isNegative = true;
             }
             else{
-                out += " " + ans[i] + "x^" + i + " +";
+                out += plus;
+            }
+            if (i==1){
+                out += ans[1] + "x";
+            }
+            else if(i == len-1){
+                out += ans[i] + "x^" + i; 
+            }
+            else{
+                out += ans[i] + "x^" + i;
+            }
+            if(isNegative){
+                ans[i] *= -1;
             }
         }
         System.out.println(out);
@@ -279,6 +365,9 @@ public class UI {
             try{
                 x = Double.parseDouble(JOptionPane.showInputDialog(null,"Masukkan input nilai fungsi yang ingin ditaksir :","Nilai Fungsi", JOptionPane.INFORMATION_MESSAGE));
                 break;
+            }
+            catch(NullPointerException e){
+                UI.exit();
             }
             catch(Exception e){
                 System.out.println("Input tidak valid.");
@@ -329,12 +418,16 @@ public class UI {
                     x += ans[i] * in[i];
                     break;
                 }
+                catch(NullPointerException e){
+                    UI.exit();
+                }
                 catch(Exception e){
                     System.out.println("Input tidak valid." + e);
                     JOptionPane.showMessageDialog(null,"Input tidak valid. " ,"Error!", JOptionPane.ERROR_MESSAGE);
                     continue;
                 }
             }
+            i++;
         }
         System.out.println("Hasil dari regresi berganda adalah: ");
         System.out.println(out);
@@ -348,8 +441,8 @@ public class UI {
     public static void prompt(){
         System.out.println("Ingin menggunakan kalkulator lagi? (y/n)");
 
-        String flag = JOptionPane.showInputDialog(null,"Ingin menggunakan kalkulator lagi? (y/n)", "prompt", JOptionPane.INFORMATION_MESSAGE);
-        if(flag.equals("y") || flag.equals("Y")){
+        String flag = JOptionPane.showInputDialog(null,"Ingin menggunakan kalkulator lagi? (y/n)", "prompt", JOptionPane.INFORMATION_MESSAGE).toLowerCase();
+        if(flag.equals("y")){
             mainMenu();
         }
         else{
