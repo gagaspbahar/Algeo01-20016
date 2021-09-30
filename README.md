@@ -36,9 +36,6 @@ List the ready features here:
 - Solving double regression problems
 
 
-## Screenshots
-![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
 
 
 ## How to run our matrix calculator?
