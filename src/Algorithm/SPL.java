@@ -114,7 +114,9 @@ public class SPL {
 
 
     public String[] parametric(Matrix M) {
-
+        String[] alphabet = {"a", "b", "c", "d", "e", "f", 
+        "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", 
+        "r", "s", "t", "u", "v", "w", "x", "y", "z"};
         int i, j, row, col, count;
         double tempD;
         row = M.getRowLength();
@@ -157,18 +159,13 @@ public class SPL {
             }
         }
 
-        // Test
-        for (i=0; i<col; i++) {
-            System.out.println(tempSolusi[i]);
-        }
-
         // Bikin nilai parametriknya
         boolean allZero = (countZero == col);
         String[] X = new String[col];
         if (!allZero) {
             for (i=col-1; i>=0; i--) {
                 if (tempSolusi[i] == 0 && count > 0){
-                    X[i] = "x" + Integer.toString(i+1);
+                    X[i] = alphabet[i];
                     count--;
                 } else if (tempSolusi[i] == 0 && count <= 0) {
                     X[i] = "";
@@ -179,8 +176,7 @@ public class SPL {
         } else {
             for (i=col-1; i>=0; i--){
                 if (count > 0) {
-                    X[i] = "x" + Integer.toString(i+1);
-                    System.out.println(X[i]);
+                    X[i] = alphabet[i];
                     count--;
                 } else {
                     X[i] = "";
@@ -234,15 +230,13 @@ public class SPL {
         col = this.m.getColLength()-1;
         if (this.m.getElmt(row, col-1) != 0 && this.m.getElmt(row, col) != 0 && row == col -1) {
             toSingleSolution();
-        } else if (this.m.getElmt(row, col-1) == 0 && this.m.getElmt(row, col) != 0) {
-            toNoSolutions();
         } else {
             toManySolutions();
         }
 
         //Check lagi buat noSolution
         for (i=0; i<row; i++){
-            if (this.m.getElmt(i, col-1) == 0 && this.m.getElmt(i, col) != 0) {
+            if (this.m.isRowZero(i) && this.m.getElmt(i, col) != 0) {
                 toNoSolutions();
             }
         }
@@ -287,21 +281,20 @@ public class SPL {
     
         // Gauss Jordan Elimination (Matriks Eselon Tereduksi)
         this.m = Operation.OBETereduksi(this.m);
+        
         //Check buat solusinya
         int row, col;
         row = this.m.getRowLength()-1;
         col = this.m.getColLength()-1;
         if (this.m.getElmt(row, col-1) != 0 && this.m.getElmt(row, col) != 0 && row == col -1) {
             toSingleSolution();
-        } else if (this.m.getElmt(row, col-1) == 0 && this.m.getElmt(row, col) != 0) {
-            toNoSolutions();
         } else {
             toManySolutions();
         }
 
         //Check lagi buat noSolution
         for (i=0; i<row; i++){
-            if (this.m.getElmt(i, col-1) == 0 && this.m.getElmt(i, col) != 0) {
+            if (this.m.isRowZero(i) && this.m.getElmt(i, col) != 0) {
                 toNoSolutions();
             }
         }

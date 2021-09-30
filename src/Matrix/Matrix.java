@@ -237,4 +237,20 @@ public class Matrix {
         }
         return countRow;
     }
+
+    // Check if all element in row is zero except the last column
+    // Precondition = augmented matrix
+    public boolean isRowZero(int i){
+        int j;
+        boolean flagZero;
+        j = 0;
+        flagZero = true;
+        while (j < this.getColLength() - 1 && flagZero){
+            if (this.getElmt(i, j) != 0) {
+                flagZero = false;
+            }
+            j++;
+        }
+        return flagZero;
+    }
 }
