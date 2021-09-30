@@ -86,24 +86,6 @@ public class UI {
             }
         }
 
-
-            // try{
-            //     choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer","SPL subMenu", JOptionPane.INFORMATION_MESSAGE));
-            //     if(choice == 0){
-            //         exit();
-            //     }
-            //     else if (choice > 4 || choice < 1){
-            //         throw new Exception();
-            //     }
-            //     else{
-            //         break;
-            //     }
-            // }
-           
-            // catch(Exception e){
-            //     JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-            //     continue;
-            // }
         Matrix m = new Matrix();
         Output o;
         String[] ans = {""};
@@ -156,24 +138,6 @@ public class UI {
                 exit();
             }
         }
-
-
-        // while(true){
-        //     try{
-        //         choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode reduksi baris (Gauss)\n2. Ekspansi kofaktor","Determinant subMenu", JOptionPane.INFORMATION_MESSAGE));
-        //         if (choice > 2 || choice < 1){
-        //             throw new Exception();
-        //         }
-        //         else{
-        //             break;
-        //         }
-        //     }
-        //     catch(Exception e){
-        //         System.out.println("Menu tidak valid. Ulangi input.");
-        //         JOptionPane.showMessageDialog(null,"Terjadi error. Input mungkin tidak valid. Mengulangi menu. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-        //         continue;
-        //     }
-        // }
 
 
         Matrix m = new Matrix();
@@ -244,25 +208,6 @@ public class UI {
             }
         }
         
-        
-        
-        // while(true){
-        //     try{
-        //         choice = Integer.parseInt(JOptionPane.showInputDialog(null,"1. Metode eliminasi Gauss\n2. Metode matriks adjoin","Inverse subMenu", JOptionPane.INFORMATION_MESSAGE));
-        //         if (choice > 2 || choice < 1){
-        //             throw new Exception();
-        //         }
-        //         else{
-        //             break;
-        //         }
-        //     }
-        //     catch(Exception e){
-        //         System.out.println("Menu tidak valid. Ulangi input.");
-        //         JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-        //         continue;
-        //     }
-        // }
-
 
         Matrix m = new Matrix();
         Matrix ans = new Matrix();
@@ -335,6 +280,9 @@ public class UI {
         out += ans[0];
         for (int i = 1; i < len; i++){
             isNegative = false;
+            if(ans[i] == 0.0){
+                ans[i] = 0.0;
+            }
             if (ans[i] < 0){
                 out += minus;
                 ans[i] *= -1;
@@ -401,6 +349,9 @@ public class UI {
         out += ans[0];
         for (int i = 1; i < len; i++){
             isNegative = false;
+            if(ans[i] == 0.0){
+                ans[i] = 0.0;
+            }
             if(ans[i] < 0){
                 out += minus;
                 ans[i] *= -1;

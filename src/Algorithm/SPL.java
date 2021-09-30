@@ -251,7 +251,9 @@ public class SPL {
         //Backward Substitution
         if (this.singleSolution) {
             x[n-1] = this.m.getElmt(n-1, n)/this.m.getElmt(n-1, n-1);
-
+            if(x[n-1] == 0.0){
+                x[n-1] = 0.0;
+            }
             for (i=n-2; i>=0; i--){
                 x[i] = this.m.getElmt(i, n);
                 
@@ -260,6 +262,9 @@ public class SPL {
                 }
         
                 x[i] = x[i]/this.m.getElmt(i, i);
+                if(x[i] == 0.0){
+                    x[i] = 0.0;
+                }
             }
             return arrayDoubleToString(x);
 
@@ -304,6 +309,9 @@ public class SPL {
         if (this.singleSolution) {
             for (i=0; i<n; i++) {
                 x[i] = this.m.getElmt(i, n);
+                if(x[i] == 0.0){
+                    x[i] = 0.0;
+                }
             }
             return arrayDoubleToString(x);
         }else if (this.manySolutions) {
@@ -363,6 +371,9 @@ public class SPL {
             // Cari tiap x dengan determminan yang telah didapat
             for (i=0; i<n; i++){
                 x[i] = (detX[i+1]/detX[0]);
+                if(x[i] == 0.0){
+                    x[i] = 0.0;
+                }
             }
                 
             return arrayDoubleToString(x);
@@ -406,6 +417,9 @@ public class SPL {
             Mres.displayMatrix();
             for (int i = 0; i < row; i++){
                 res[i] = Mres.getElmt(i, 0);
+                if(res[i] == 0.0){
+                    res[i] = 0.0;
+                }
             }
         
             return arrayDoubleToString(res);  
