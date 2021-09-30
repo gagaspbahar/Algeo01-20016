@@ -3,83 +3,90 @@ import Matrix.*;
 
 public class Operation {
     public static Matrix OBE(Matrix M){
-        int i,j,k,row,col,x;
-        double a,b,ratio;
-        row = M.getRowLength();
-        col = M.getColLength();
-        for(i=0;i<row;i++){
-            x = i;
-            //Find first non 0 index
-            while(x < row && M.getElmt(x, i) == 0){
-                x++;
-            }
-            //Main diagonal element == 0
-            if(x == row){
-                continue;
-            }
+        int row = M.getRowLength();
+        int col = M.getColLength();
+        int i = 0;
+        int j =0;
 
-            //Switch row between i and non-zero index
-            if (x!=i){
-                for (j=0; j<col;j++){
-                    double temp;
-                    temp = M.getElmt(x, j);
-                    M.setElmt(M.getElmt(i, j), x, j);
-                    M.setElmt(temp, i, j);
+        while (j<col){
+            boolean cariSatu = false;
+
+            if(M.getElmt(i, j) == 0){
+                boolean cariNol = false;
+                int colCheck = i +1;
+
+                while(colCheck<row && !cariNol){
+                    if (M.getElmt(colCheck, j) != 0){
+                        cariNol = true;
+                        for (int x = 0; x < col; x++){
+                            double temp = M.getElmt(colCheck, x);
+                            M.setElmt(M.getElmt(i, x), colCheck, x);
+                            M.setElmt(temp, i, x);
+                        }
+                    }
+                    ++colCheck;
                 }
             }
+           
+            if(M.getElmt(i, j) != 0){
+                double per = M.getElmt(i, j);
+                for (int a = 0; a < col; a++){
+                    M.setElmt(M.getElmt(i, a)/per, i, a);
+                }
+                cariSatu = true;
 
-            for (j = i+1; j<row; j++){
-                a = M.getElmt(j, i);
-                b = M.getElmt(i, i);
-                ratio = a/b;
-
-                for (k = 0;k<col;k++){
-                    M.setElmt(M.getElmt(j, k) - ratio*M.getElmt(i, k), j, k);
-
-
+                double factor;
+                int rowLain = i+1;
+                while (rowLain < row){
+                    factor = M.getElmt(rowLain, j);
+                    double val;
+                    for (int k = 0; k < col; k++){
+                        val = M.getElmt(i, k) * factor;
+                        M.setElmt(M.getElmt(rowLain, k) - val, rowLain, k);
+                    }
+                    rowLain++;
                 }
 
-               
             }
+            if (cariSatu){
+                i++;
+            }
+
+            if (row <= i){
+                break;
+            }
+            j++;
         }
 
-        for (i=0;i<row;i++){
-            if(M.getElmt(i, i)!= 0){
-                ratio = M.getElmt(i, i);
-                for (j = i; j<col; j++){
-                    M.setElmt(M.getElmt(i, j)/ratio, i, j);
-                }
-            }
-        }
+        
+        
 
         return M;
     }
 
     public static Matrix OBETereduksi(Matrix M){
-        int i, j, k, row, col;
-        double a, b, ratio;
+        int i , j;
+        int row = M.getRowLength();
+        int col = M.getColLength();
         M = OBE(M);
-    
-        row = M.getRowLength();
-        col = M.getColLength();
-    
-        for (i=row-1; i>=1; i--){
-    
-            // Diagonal Utama ada elemen yang 0 maka tidak dilakukan operasi
-            if (M.getElmt(i, i) == 0) {
-                continue;
-            }
-    
-            for (j=i-1; j>=0;j--) {
-                a = M.getElmt(j, i);
-                b = M.getElmt(i, i);
-                ratio = a/b;
-    
-                for (k=0; k<col; k++){
-                    M.setElmt(M.getElmt(j, k) - ratio*M.getElmt(i, k), j, k);
+        for (i = row - 1 ; i >= 0; i--){
+            for(j = col -1 ; j >= 0; j--){
+                if (M.getElmt(i, j) == 1){
+                    double factor;
+                    int rowLain = i -1;
+                    while (rowLain >= 0){
+                        factor = M.getElmt(rowLain, j);
+                        double val;
+                        for (int k = 0; k < col; k++){
+                            val = M.getElmt(i, k) * factor;
+                            M.setElmt(M.getElmt(rowLain, k) - val, rowLain, k);
+                        }
+                        rowLain--;
+
+                    }
                 }
             }
-        }    
+        }
         return M;
     }
 
