@@ -16,11 +16,11 @@
 
 ## General Information
 A matrix calculator made in Java with simple GUI using java.swing library. This repository contains files needed for Tubes 1 Algeo. 
-The project we're making is a Java library for Linear Algebra problems (specifically matrices). This includes SPL, Determinant, Inverse, and others.
+The project we're making is a Java library for Linear Algebra problems (specifically matrices). This includes SPL, Determinant, Inverse, and others.\n
 Contributors:
-13520016 Gagas Praharsa Bahar
-13520044 Adiyansa Prasetya Wicaksana
-13520081 Andhika Arta Aryanto
+- 13520016 Gagas Praharsa Bahar
+- 13520044 Adiyansa Prasetya Wicaksana
+- 13520081 Andhika Arta Aryanto
 
 
 ## Technologies Used
