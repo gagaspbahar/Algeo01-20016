@@ -10,7 +10,6 @@ public class MatrixInput {
     // Input prompt
     public static Matrix Input(){
         Matrix m = new Matrix();
-        // Scanner sc = new Scanner(System.in);
         System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
         System.out.println("2. Input dari file");
@@ -42,30 +41,13 @@ public class MatrixInput {
             }
         }
 
-        // while(true){
-        //     try{
-        //         method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));
-        //         if (method > 2 || method < 1){
-        //             throw new Exception();
-        //         }
-        //         else{
-        //             break;
-        //         }
-        //     }
-        //     catch(Exception e){
-        //         System.out.println("Menu tidak valid. Ulangi input.");
-        //         JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-
-        //         continue;
-        //     }
-        // }
         if(method == 1){
             m = consoleInput();
         }
         else if(method == 2){
             m = fileInput();
         }
-        // sc.close();
+
         return m;
     }
 
@@ -101,23 +83,7 @@ public class MatrixInput {
                 exit();
             }
         }
-        // while(true){
-        //     try{
-        //         method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));
-        //         if (method > 2 || method < 1){
-        //             throw new Exception();
-        //         }
-        //         else{
-        //             break;
-        //         }
-        //     }
-        //     catch(Exception e){
-        //         System.out.println("Menu tidak valid. Ulangi input.");
-        //         JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
 
-        //         continue;
-        //     }
-        // }
         if(method == 1){
             m = interpolateInt();
         }
@@ -183,21 +149,6 @@ public class MatrixInput {
                 for(int b=0; b<row; b++){
                     for(int c=0; c<col; c++){
                         m.setElmt(Double.parseDouble(((JTextField)panel.getComponent(b*col + c)).getText()), b, c);
-
-                        // try{
-                        //     Component tempc = panel.getComponent(b*col + c);
-                        //     m.setElmt(Double.parseDouble(((JTextField)panel.getComponent(b*col + c)).getText()), b, c);
-                        // }
-                        // catch(NumberFormatException e){
-                        //     System.out.println("Menu tidak valid. Ulangi input.");
-                        //     System.out.println(e);
-                        //     JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
-                        //     continue;
-                        // }
-                        // catch(NullPointerException e){
-                        //     System.out.println(e);
-                        //     UI.exit();
-                        // }
                     }
                 }
             }
@@ -205,13 +156,11 @@ public class MatrixInput {
 
             exit();
         }
-        // sc.close();
         return m;
     }
 
     // Input b (SPL only, from console)
     public static Matrix SPLInput(){
-        // Scanner sc = new Scanner(System.in);
         Matrix m = new Matrix();
         System.out.println("Pilih cara input matrix:");
         System.out.println("1. Input keyboard");
@@ -243,29 +192,6 @@ public class MatrixInput {
                 exit();
             }
         }
-
-
-        // while(true){
-        //     try{
-
-        //         method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix:\n1. Input keyboard\n2. Input dari file"));;
-
-        //         if (method > 2 || method < 1){
-        //             throw new Exception();
-        //         }
-        //         else{
-        //             break;
-        //         }
-        //     }
-
-        //     catch(Exception e){
-        //         System.out.println("Menu tidak valid. Ulangi input.");
-        //         JOptionPane.showMessageDialog(null,"Menu tidak valid. Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-
-        //         continue;
-        //     }
-        // }
-
 
         if(method == 1){
             m = consoleInput();
@@ -306,7 +232,6 @@ public class MatrixInput {
     public static Matrix fileInput(){
         try{
             String path;
-            // Scanner sc = new Scanner(System.in);
             System.out.println("Masukkan nama file berisi matriks:");
             String filename = JOptionPane.showInputDialog(null,"Masukkan nama file berisi matriks :");
             if(Objects.isNull(filename)){
@@ -322,8 +247,6 @@ public class MatrixInput {
             }
             System.out.println(path);
             File file = new File(path);
-            // File file = new File("test\\mat.txt");
-            // System.out.println(file.getAbsolutePath());
             Scanner scfile = new Scanner(file);
             int col = 0;
             int row = 0;
@@ -341,7 +264,6 @@ public class MatrixInput {
                 }
             }
             scfile.close();
-            // sc.close();
             return m;
         }
         catch(FileNotFoundException e){

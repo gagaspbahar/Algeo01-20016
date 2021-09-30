@@ -88,7 +88,6 @@ public class UI {
 
         Matrix m = new Matrix();
         Output o;
-        String[] ans = {""};
         String out = "";
 
         try{
@@ -100,7 +99,7 @@ public class UI {
             m = MatrixInput.SPLInput();
         }
         SPL spl = new SPL(m);
-        ans = spl.solve(choice);
+        spl.solve(choice);
         out = spl.consoleOut();
         System.out.print(out);
         JOptionPane.showMessageDialog(null,out,"Hasil SPL adalah", JOptionPane.INFORMATION_MESSAGE);

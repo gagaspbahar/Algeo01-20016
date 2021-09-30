@@ -36,6 +36,76 @@ List the ready features here:
 - Solving double regression problems
 
 
+## Structure
+```bash
+.
+│   README.md
+│
+├───bin                                     # Bytecode-containing folder
+│   ├───Algorithm
+│   │       Interpolate.class
+│   │       Invers.class
+│   │       Operation.class
+│   │       Regression.class
+│   │       SPL.class
+│   │
+│   ├───Main
+│   │       Main.class
+│   │
+│   ├───Matrix
+│   │       Matrix.class
+│   │       MatrixInput.class
+│   │
+│   └───Utility
+│           Output.class
+│           UI.class
+│
+├───doc                             # documentation
+├───src                             # Source code
+│   ├───Algorithm                   # Algorithm package
+│   │       Interpolate.java
+│   │       Invers.java
+│   │       Operation.java
+│   │       Regression.java
+│   │       SPL.java
+│   │
+│   ├───Main                        # Main package   
+│   │       Main.java
+│   │
+│   ├───Matrix                      # Matrix package
+│   │       Matrix.java
+│   │       MatrixInput.java
+│   │
+│   └───Utility                     # Utility package
+│           Output.java
+│           UI.java
+│
+└───test                            # Testing cases
+    │   mat.txt
+    │   matrix_test_case.txt
+    │   spl1.txt
+    │   spl2.txt
+    │   spl3.txt
+    │   spl4.txt
+    │   studikasus1a.txt
+    │   studikasus1b.txt
+    │   studikasus1c.txt
+    │   studikasus1d10.txt
+    │   studikasus1d6.txt
+    │   studikasus1dd10.txt
+    │   studikasus2a.txt
+    │   studikasus2b.txt
+    │   studikasus3a.txt
+    │   studikasus3b.txt
+    │   studikasus4.txt
+    │   studikasus5.txt
+    │   studikasus6a.txt
+    │   studikasus6b.txt
+    │   studikasus6c.txt
+    │   studikasus7.txt
+    │
+    └───result                      # Result file directory
+```
 
 
 ## How to run our matrix calculator?
