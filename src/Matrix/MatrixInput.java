@@ -123,26 +123,22 @@ public class MatrixInput {
             for(int a=0; a<(row*col); a++){
                 for(int b=0; b<row; b++){
                     for(int c=0; c<col; c++){
-                        try{
-                            Component tempc = panel.getComponent(b*col + c);
-                            
-                            if(Objects.isNull(tempc)){
-                                throw new NullPointerException();
-                            }
-                            else{
-                                m.setElmt(Double.parseDouble(((JTextField)tempc).getText()), b, c);
-                                break;
-                            }
-                        }
-                        catch(NumberFormatException e){
-                            System.out.println("Menu tidak valid. Ulangi input.");
-                            System.out.println(e);
-                            JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
-                            continue;
-                        }
-                        catch(NullPointerException e){
-                            UI.exit();
-                        }
+                        m.setElmt(Double.parseDouble(((JTextField)panel.getComponent(b*col + c)).getText()), b, c);
+
+                        // try{
+                        //     Component tempc = panel.getComponent(b*col + c);
+                        //     m.setElmt(Double.parseDouble(((JTextField)panel.getComponent(b*col + c)).getText()), b, c);
+                        // }
+                        // catch(NumberFormatException e){
+                        //     System.out.println("Menu tidak valid. Ulangi input.");
+                        //     System.out.println(e);
+                        //     JOptionPane.showMessageDialog(null,"Menu tidak valid, Ulangi input. " ,"Error!", JOptionPane.ERROR_MESSAGE);   
+                        //     continue;
+                        // }
+                        // catch(NullPointerException e){
+                        //     System.out.println(e);
+                        //     UI.exit();
+                        // }
                     }
                 }
             }
@@ -229,7 +225,6 @@ public class MatrixInput {
                 for(int a=0; a<(row*1); a++){
                     for(int b=0; b<row; b++){
                         for(int c=0; c<1; c++){
-
                             ext.setElmt(Double.parseDouble(((JTextField)panel.getComponent(b + c)).getText()), b, c);
                         }
                     }
