@@ -1,9 +1,6 @@
 package Matrix;
 import java.util.Scanner;
 import javax.swing.*;
-
-import Utility.UI;
-
 import java.awt.*;
 import java.io.*;
 import java.util.Objects;

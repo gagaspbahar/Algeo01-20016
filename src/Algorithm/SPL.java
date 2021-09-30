@@ -240,6 +240,14 @@ public class SPL {
             toManySolutions();
         }
 
+        //Check lagi buat noSolution
+        for (i=0; i<row; i++){
+            if (this.m.getElmt(i, col-1) == 0 && this.m.getElmt(i, col) != 0) {
+                toNoSolutions();
+            }
+        }
+
+
         //Backward Substitution
         if (this.singleSolution) {
             x[n-1] = this.m.getElmt(n-1, n)/this.m.getElmt(n-1, n-1);
@@ -274,7 +282,6 @@ public class SPL {
     
         // Gauss Jordan Elimination (Matriks Eselon Tereduksi)
         this.m = Operation.OBETereduksi(this.m);
-
         //Check buat solusinya
         int row, col;
         row = this.m.getRowLength()-1;
@@ -285,6 +292,13 @@ public class SPL {
             toNoSolutions();
         } else {
             toManySolutions();
+        }
+
+        //Check lagi buat noSolution
+        for (i=0; i<row; i++){
+            if (this.m.getElmt(i, col-1) == 0 && this.m.getElmt(i, col) != 0) {
+                toNoSolutions();
+            }
         }
     
         if (this.singleSolution) {
