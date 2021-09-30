@@ -41,7 +41,7 @@ List the ready features here:
 .
 │   README.md
 │
-├───bin
+├───bin                                     # Bytecode-containing folder
 │   ├───Algorithm
 │   │       Interpolate.class
 │   │       Invers.class
@@ -60,27 +60,27 @@ List the ready features here:
 │           Output.class
 │           UI.class
 │
-├───doc
-├───src
-│   ├───Algorithm
+├───doc                             # documentation
+├───src                             # Source code
+│   ├───Algorithm                   # Algorithm package
 │   │       Interpolate.java
 │   │       Invers.java
 │   │       Operation.java
 │   │       Regression.java
 │   │       SPL.java
 │   │
-│   ├───Main
+│   ├───Main                        # Main package   
 │   │       Main.java
 │   │
-│   ├───Matrix
+│   ├───Matrix                      # Matrix package
 │   │       Matrix.java
 │   │       MatrixInput.java
 │   │
-│   └───Utility
+│   └───Utility                     # Utility package
 │           Output.java
 │           UI.java
 │
-└───test
+└───test                            # Testing cases
     │   mat.txt
     │   matrix_test_case.txt
     │   spl1.txt
@@ -104,7 +104,7 @@ List the ready features here:
     │   studikasus6c.txt
     │   studikasus7.txt
     │
-    └───result
+    └───result                      # Result file directory
 ```
 
 
