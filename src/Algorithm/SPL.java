@@ -1,6 +1,5 @@
 package Algorithm;
 import Matrix.*;
-import Utility.*;
 
 import javax.swing.*;
 
@@ -37,7 +36,6 @@ public class SPL {
             default:
                 System.out.println("Pilihan tidak valid. Mengembalikan ke menu awal.");
                 JOptionPane.showMessageDialog(null,"Terjadi error. Input mungkin tidak valid. Mengulangi menu. " ,"Error!", JOptionPane.ERROR_MESSAGE);
-                Menu.SPLMenu();
         }
         this.solution = ans;
         return ans;

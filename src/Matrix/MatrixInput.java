@@ -1,10 +1,8 @@
 package Matrix;
 import java.util.Scanner;
 import javax.swing.*; 
-import Algorithm.Operation;
 import java.awt.*;
 import java.io.*;
-import Utility.*;
 import java.util.Objects;
 
 public class MatrixInput {
@@ -40,7 +38,7 @@ public class MatrixInput {
                 continue;
             }
             catch(Exception e){
-                UI.exit();
+                exit();
             }
         }
 
@@ -100,7 +98,7 @@ public class MatrixInput {
                 continue;
             }
             catch(Exception e){
-                UI.exit();
+                exit();
             }
         }
 
@@ -238,7 +236,7 @@ public class MatrixInput {
                 continue;
             }
             catch(Exception e){
-                UI.exit();
+                exit();
             }
         }
 
@@ -290,7 +288,7 @@ public class MatrixInput {
                     }
                 }
             }
-            m = Operation.extendMatrix(m, ext);
+            m = extendMatrix(m, ext);
         }
         else if(method == 2){
             m = fileInput();
@@ -341,10 +339,37 @@ public class MatrixInput {
         }
         catch(Exception e){
             System.out.println(e);
-            UI.exit();
+            exit();
             Matrix m = new Matrix(1,1);
             m.setElmt(1, 0, 0);
             return m;
         }      
+    }
+
+    public static void exit(){
+        System.exit(0);
+    }
+
+    public static Matrix extendMatrix(Matrix M1 , Matrix M2){
+        Matrix extend;
+        int RowsM1, ColsM1, ColsM2, i , j;
+        RowsM1 = M1.getRowLength();
+        ColsM1 = M1.getColLength();
+        ColsM2 = M2.getColLength();
+
+        extend = new Matrix(RowsM1,ColsM1+ColsM2);
+        for (i=0; i<RowsM1; i++) {
+            for (j=0; j<(ColsM1 +ColsM2); j++) {
+                if (j < ColsM1) {
+                
+                    extend.setElmt(M1.getElmt(i, j), i, j);
+                } else {
+                    
+                    extend.setElmt(M2.getElmt(i, j-ColsM1), i, j);
+                }
+            }
+        }
+        return extend;
+
     }
 }

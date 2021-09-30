@@ -1,9 +1,10 @@
-package Utility;
+
 
 import java.util.InputMismatchException;
 
 import Algorithm.*;
 import Matrix.*;
+import Utility.Output;
 import Main.*;
 public class Menu {
     // public static Scanner sc = new Scanner(System.in);
