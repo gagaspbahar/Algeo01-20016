@@ -15,7 +15,7 @@ public class SPL {
         this.m = M;
     }
 
-    public String[] solve(int choice){
+    public void solve(int choice){
         String[] ans = {""};
         switch (choice){
             case 1:
@@ -35,7 +35,6 @@ public class SPL {
 
         }
         this.solution = ans;
-        return ans;
     }
 
     public String consoleOut(){
