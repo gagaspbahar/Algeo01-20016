@@ -79,7 +79,7 @@ public class MatrixInput {
         String temps;
         while(true){
             try{
-                temps = JOptionPane.showInputDialog(null,"Pilih cara input interpolasi :\n1. Input keyboard\n2. Input dari file");
+                temps = JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file");
                 if (Objects.isNull(temps)){
                     throw new Exception();
                 }
@@ -101,7 +101,6 @@ public class MatrixInput {
                 exit();
             }
         }
-
         // while(true){
         //     try{
         //         method = Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih cara input matrix :\n1. Input keyboard\n2. Input dari file"));

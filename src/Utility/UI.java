@@ -354,7 +354,7 @@ public class UI {
             }
         }
         System.out.println(out);
-        JOptionPane.showMessageDialog(null,"Hasil dari interpolasi adalah " + out);
+        JOptionPane.showMessageDialog(null,out, "HASIL DARI INTERPOLASI :", JOptionPane.INFORMATION_MESSAGE);
         System.out.println("Masukkan input nilai fungsi yang ingin ditaksir: ");
         double x = 0;
         while(true){
@@ -373,7 +373,7 @@ public class UI {
         }
         double guess = Interpolate.functionInterpolate(ans, x);
         System.out.println("Hasil nilai taksiran f(" + x + ") = " + guess);
-        JOptionPane.showMessageDialog(null,"Hasil nilai taksiran f(" + x + ") = " + guess);
+        JOptionPane.showMessageDialog(null,guess,"Hasil nilai taksiran f(" + x + ") = ",JOptionPane.INFORMATION_MESSAGE);
         Output o = new Output(out, x, guess);
         o.interpolateToFile();
         prompt();
@@ -415,7 +415,7 @@ public class UI {
                 ans[i] *= -1;
             }
         }
-        double x = 0;
+        double x = ans[0];
         double[] in = new double [ans.length];
         int i = 1;
         while(i < ans.length){
@@ -438,8 +438,8 @@ public class UI {
         }
         System.out.println("Hasil dari regresi berganda adalah: ");
         System.out.println(out);
-        JOptionPane.showMessageDialog(null,"Hasil dari regresi berganda adalah: " + out);
-        JOptionPane.showMessageDialog(null,"Hasil regresi dengan parameter input adalah y = " + x);
+        JOptionPane.showMessageDialog(null, out, "Hasil dari regresi berganda adalah: ", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,"y = " + x, "Hasil regresi dengan parameter input", JOptionPane.INFORMATION_MESSAGE);
         Output o = new Output(out, x, in);
         o.regressionToFile();
         prompt();
