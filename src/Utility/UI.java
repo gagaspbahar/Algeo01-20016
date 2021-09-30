@@ -3,6 +3,7 @@ import javax.swing.*;
 import Algorithm.*;
 import Matrix.*;
 import java.awt.*;
+
 public class UI {
 
     public static void mainMenu(){
@@ -108,7 +109,7 @@ public class UI {
         //     }
         // }
         System.out.print(out);
-        JOptionPane.showMessageDialog(null,out);
+        JOptionPane.showMessageDialog(null,out,"Hasil SPL adalah", JOptionPane.INFORMATION_MESSAGE);
         System.out.println();
         o = new Output(out);
         o.SPLtoFile();
@@ -234,7 +235,7 @@ public class UI {
                 pane.add(label);
             }
         }
-        JOptionPane.showMessageDialog(new JFrame(), pane);
+        JOptionPane.showMessageDialog(new JFrame(), pane,"Matriks Balikan dari matriks input adalah ", JOptionPane.INFORMATION_MESSAGE);
         Output o = new Output(ans);
         o.inverseToFile();
         prompt();

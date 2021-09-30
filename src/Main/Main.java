@@ -1,5 +1,4 @@
 package Main;
-
 import java.util.Scanner;
 import Matrix.*;
 import Utility.*;

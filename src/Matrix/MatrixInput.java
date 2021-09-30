@@ -53,10 +53,11 @@ public class MatrixInput {
         JOptionPane.showMessageDialog(null,"Masukkan matriks");
         JPanel panel = new JPanel();     
         panel.setLayout(new GridLayout(row,col));
+        
 
         for (int a=0; a<(row*col); a++)
         {
-            panel.add(new JTextField(a));
+            panel.add(new JTextField(3));
         }
 
         if (JOptionPane.showConfirmDialog(null, panel, "Masukkan Matriks", JOptionPane.OK_CANCEL_OPTION)
@@ -110,7 +111,7 @@ public class MatrixInput {
 
             for (int a=0; a<(row*1); a++)
             {
-                panel.add(new JTextField(a));
+                panel.add(new JTextField(1));
             }
 
             if (JOptionPane.showConfirmDialog(null, panel, "Enter the matrix", JOptionPane.OK_CANCEL_OPTION)
