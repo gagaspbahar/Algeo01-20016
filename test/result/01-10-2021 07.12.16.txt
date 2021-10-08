@@ -1,6 +1,0 @@
-LINEAR SYSTEMS OF EQUATION RESULT 01-10-2021 07.12.16
-X1 = 3.0  +e 
-X2 =  +2.0*e 
-X3 = c
-X4 = -1.0  +e 
-X5 = e
