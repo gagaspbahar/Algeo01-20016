@@ -1,0 +1,5 @@
+LINEAR SYSTEMS OF EQUATION RESULT 08-10-2021 19.37.29
+X1 = 8.0  +3.0*d 
+X2 = -5.0  -d 
+X3 = -7.0  -2.0*d 
+X4 = d

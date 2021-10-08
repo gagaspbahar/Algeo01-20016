@@ -222,7 +222,7 @@ public class SPL {
 
         //Gauss Elimination
         this.m = Operation.OBE(this.m);
-
+        
         //Check buat solusinya
         int row, col;
         row = this.m.getRowLength()-1;
@@ -234,12 +234,11 @@ public class SPL {
         }
 
         //Check lagi buat noSolution
-        for (i=0; i<row; i++){
+        for (i=0; i<=row; i++){
             if (this.m.isRowZero(i) && this.m.getElmt(i, col) != 0) {
                 toNoSolutions();
             }
         }
-
 
         //Backward Substitution
         if (this.singleSolution) {

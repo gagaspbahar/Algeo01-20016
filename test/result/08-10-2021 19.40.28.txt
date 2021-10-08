@@ -1,0 +1,6 @@
+LINEAR SYSTEMS OF EQUATION RESULT 08-10-2021 19.40.28
+X1 = -1.0 
+X2 =  -1.5* 
+X3 =  -1.5* 
+X4 =  +1.5* 
+X5 = 0.0
