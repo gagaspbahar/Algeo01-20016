@@ -129,7 +129,7 @@ public class SPL {
         double[] tempSolusi = new double[col];
 
         for (i=0; i<col; i++) { // inisiasi nilai solusi sementara
-            tempSolusi[i] = 0; 
+            tempSolusi[i] = -999; //MARK
         }
 
         for (i=0; i<row; i++) {
@@ -146,7 +146,11 @@ public class SPL {
         for (i=row-1; i>=0; i--){
             tempD = this.m.getElmt(i, col);
             for (j=tempIndex[i][1]; j<col; j++) {
-                tempD -= (tempSolusi[j]*this.m.getElmt(i, j));
+                if (tempSolusi[j] == -999){
+                    tempD -= (0*this.m.getElmt(i, j));
+                } else {
+                    tempD -= (tempSolusi[j]*this.m.getElmt(i, j));
+                }
             }
             tempSolusi[tempIndex[i][1]] = tempD;
         }
@@ -163,10 +167,10 @@ public class SPL {
         String[] X = new String[col];
         if (!allZero) {
             for (i=col-1; i>=0; i--) {
-                if (tempSolusi[i] == 0 && count > 0){
+                if (tempSolusi[i] == -999 && count > 0){
                     X[i] = alphabet[i];
                     count--;
-                } else if (tempSolusi[i] == 0 && count <= 0) {
+                } else if (tempSolusi[i] == -999 && count <= 0) {
                     X[i] = "";
                 } else {
                     X[i] = Double.toString(tempSolusi[i]) + " ";
@@ -187,7 +191,7 @@ public class SPL {
         for (i=0; i<row; i++){
             tempS = X[tempIndex[i][1]];
             for (j=tempIndex[i][1]; j<col; j++){
-                if (tempSolusi[j] == 0 && this.m.getElmt(i, j) != 0 && tempIndex[i][1] != j){
+                if (tempSolusi[j] == -999 && this.m.getElmt(i, j) != 0 && tempIndex[i][1] != j){
                     if (this.m.getElmt(i, j) == 1){
                         tempS += " -" + X[j] + " ";
                     }else if (this.m.getElmt(i, j) == -1) {
@@ -291,7 +295,7 @@ public class SPL {
         }
 
         //Check lagi buat noSolution
-        for (i=0; i<row; i++){
+        for (i=0; i<=row; i++){
             if (this.m.isRowZero(i) && this.m.getElmt(i, col) != 0) {
                 toNoSolutions();
             }
